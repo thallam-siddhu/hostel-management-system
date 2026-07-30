@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Security QR Scanner</title>
+
+    <meta charset="UTF-8">
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            text-align:center;
+        }
+
+        .container{
+
+            width:650px;
+            margin:auto;
+            margin-top:40px;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;
+
+        }
+
+        #reader{
+
+            width:500px;
+            margin:auto;
+
+        }
+
+        button{
+
+            padding:10px 20px;
+            font-size:16px;
+            cursor:pointer;
+            border:none;
+            border-radius:5px;
+            background:#3498db;
+            color:white;
+
+        }
+
+        h2{
+
+            color:#2c3e50;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>📷 Security QR Scanner</h2>
+
+<p>
+Allow camera permission and scan the student's QR code.
+</p>
+
+<div id="reader"></div>
+
+<br>
+
+<a href="/security/dashboard">
+<button>⬅ Back to Dashboard</button>
+</a>
+
+</div>
+
+<script>
+
+function onScanSuccess(decodedText, decodedResult){
+
+    console.log("QR Code:", decodedText);
+
+    html5QrcodeScanner.clear();
+
+    window.location.href="/security/verify/"+encodeURIComponent(decodedText);
+
+}
+
+function onScanFailure(error){
+
+    // Ignore scanning errors
+
+}
+
+let html5QrcodeScanner=new Html5QrcodeScanner(
+
+    "reader",
+
+    {
+
+        fps:10,
+
+        qrbox:{
+            width:250,
+            height:250
+        }
+
+    },
+
+    false
+
+);
+
+html5QrcodeScanner.render(onScanSuccess,onScanFailure);
+
+</script>
+
+</body>
+</html>

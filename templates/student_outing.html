@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Outing Request</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+label{
+    font-weight:bold;
+    display:block;
+    margin-top:15px;
+    margin-bottom:6px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing:border-box;
+    font-size:15px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:80px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:12px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+.back{
+    text-align:center;
+    margin-top:20px;
+}
+
+.back button{
+    width:auto;
+    background:#2c3e50;
+    padding:10px 25px;
+}
+
+.back button:hover{
+    background:#1d2c3b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🚶 Outing Permission Request</h1>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<form method="POST" action="/student/apply_outing">
+
+<label>Outing Type</label>
+
+<select name="outing_type" required>
+
+<option value="">Select Outing Type</option>
+<option value="Local">🏙 Local Outing</option>
+<option value="Native">🏠 Native Outing</option>
+
+</select>
+
+<label>Destination</label>
+
+<input
+type="text"
+name="destination"
+placeholder="Enter Destination"
+required>
+
+<label>Reason</label>
+
+<textarea
+name="reason"
+placeholder="Enter Reason"
+required></textarea>
+
+<label>Out Date</label>
+
+<input
+type="date"
+id="out_date"
+name="out_date"
+required>
+
+<label>Out Time</label>
+
+<input
+type="time"
+name="out_time"
+required>
+
+<label>Return Date</label>
+
+<input
+type="date"
+id="return_date"
+name="return_date"
+required>
+
+<label>Return Time</label>
+
+<input
+type="time"
+name="return_time"
+required>
+
+<label>Parent Mobile Number</label>
+
+<input
+type="tel"
+name="parent_mobile"
+pattern="[0-9]{10}"
+maxlength="10"
+placeholder="Enter 10-digit Mobile Number"
+required>
+
+<button type="submit">
+
+📩 Submit Outing Request
+
+</button>
+
+</form>
+
+<div class="back">
+
+<a href="/student/dashboard">
+
+<button type="button">
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Today's date
+const today = new Date().toISOString().split("T")[0];
+
+// Prevent previous dates
+document.getElementById("out_date").min = today;
+document.getElementById("return_date").min = today;
+
+// Return date cannot be before Out Date
+document.getElementById("out_date").addEventListener("change", function(){
+
+    document.getElementById("return_date").min = this.value;
+
+    if(document.getElementById("return_date").value < this.value){
+        document.getElementById("return_date").value = "";
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

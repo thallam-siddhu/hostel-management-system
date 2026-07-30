@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Security Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:60px;
+}
+
+.card{
+    width:400px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+label{
+    font-weight:bold;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+input:focus{
+    border:1px solid #3498db;
+    outline:none;
+}
+
+.login-btn{
+    width:100%;
+    padding:12px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#2980b9;
+}
+
+.info{
+    margin-top:20px;
+    text-align:center;
+    color:#555;
+    font-size:14px;
+}
+
+.back{
+    text-align:center;
+    margin-top:25px;
+}
+
+.back a{
+    text-decoration:none;
+}
+
+.back button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.back button:hover{
+    background:#1f2d3d;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#777;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🛡️ Security Login</h2>
+
+<form method="POST">
+
+<label>Username</label>
+
+<input
+type="text"
+name="username"
+placeholder="Enter Username"
+required>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button
+type="submit"
+class="login-btn">
+
+🔐 Login
+
+</button>
+
+</form>
+
+<div class="info">
+
+Security staff can log in to verify outing permissions and manage student entry and exit records.
+
+</div>
+
+<div class="back">
+
+<a href="/">
+
+<button type="button">
+
+⬅ Back
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Security Portal
+
+</div>
+
+</body>
+
+</html>

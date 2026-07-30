@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Hostel Notices</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+}
+
+.title{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:30px;
+    font-size:28px;
+}
+
+.notice{
+
+    background:white;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    border-left:6px solid #3498db;
+
+    border-radius:10px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+.notice:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+}
+
+.notice h3{
+
+    color:#2c3e50;
+
+    margin-bottom:10px;
+
+}
+
+.notice p{
+
+    color:#555;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+
+}
+
+.date{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.empty{
+
+    background:white;
+
+    padding:50px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.empty h3{
+
+    color:#888;
+
+}
+
+.back{
+
+    text-align:center;
+
+    margin-top:35px;
+
+}
+
+.back button{
+
+    background:#2c3e50;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:6px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.back button:hover{
+
+    background:#1f2d3d;
+
+}
+
+.footer{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<h2 class="title">
+
+📢 Hostel Notices
+
+</h2>
+
+{% if notices %}
+
+{% for notice in notices %}
+
+<div class="notice">
+
+<h3>
+
+📌 {{ notice[0] }}
+
+</h3>
+
+<p>
+
+{{ notice[1] }}
+
+</p>
+
+<div class="date">
+
+📅 Published On: {{ notice[2] }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+<h3>
+
+📭 No Notices Available
+
+</h3>
+
+<p>
+
+There are currently no notices published by the hostel administration.
+
+</p>
+
+</div>
+
+{% endif %}
+
+<div class="back">
+
+<a href="/student/dashboard">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Student Notice Board
+
+</div>
+
+</body>
+
+</html>

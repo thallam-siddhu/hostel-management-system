@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Room Change Requests</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+    margin:0;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:95%;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.approved{
+    color:green;
+    font-weight:bold;
+}
+
+.rejected{
+    color:red;
+    font-weight:bold;
+}
+
+button{
+    padding:8px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    color:white;
+}
+
+.approve{
+    background:green;
+}
+
+.reject{
+    background:red;
+}
+
+.back{
+    background:#3498db;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🔄 Room Change Requests</h1>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<table>
+
+<tr>
+
+<th>Register No</th>
+<th>Student Name</th>
+<th>Current Room</th>
+<th>Requested Room</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Date</th>
+<th>Action</th>
+
+</tr>
+
+{% for request in requests %}
+
+<tr>
+
+<td>{{ request[1] }}</td>
+
+<td>{{ request[2] }}</td>
+
+<td>{{ request[3] }}</td>
+
+<td>{{ request[4] }}</td>
+
+<td>{{ request[5] }}</td>
+
+<td>
+
+{% if request[6]=="Pending" %}
+
+<span class="pending">Pending</span>
+
+{% elif request[6]=="Approved" %}
+
+<span class="approved">Approved</span>
+
+{% else %}
+
+<span class="rejected">Rejected</span>
+
+{% endif %}
+
+</td>
+
+<td>{{ request[7] }}</td>
+
+<td>
+
+{% if request[6]=="Pending" %}
+
+<a href="/admin/approve_room_change/{{ request[0] }}">
+<button class="approve">Approve</button>
+</a>
+
+<a href="/admin/reject_room_change/{{ request[0] }}">
+<button class="reject">Reject</button>
+</a>
+
+{% else %}
+
+Completed
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/admin/dashboard">
+
+<button class="back">
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

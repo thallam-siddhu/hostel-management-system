@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Room Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    
+    --brand-primary: #0f172a;
+    --brand-accent: #2563eb;
+    --brand-accent-hover: #1d4ed8;
+    
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+
+    /* Badge & State Accents */
+    --badge-green-bg: #f0fdf4;
+    --badge-green-text: #166534;
+    --badge-green-border: #bbf7d0;
+
+    --badge-blue-bg: #eff6ff;
+    --badge-blue-text: #1e40af;
+    --badge-blue-border: #bfdbfe;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    background: var(--brand-primary);
+    color: #ffffff;
+    padding: 44px 24px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* ===== Container ===== */
+  .container {
+    max-width: 720px;
+    margin: -32px auto 48px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ===== Card ===== */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ===== Modern Detail List ===== */
+  .detail-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: #ffffff;
+  }
+
+  .detail-row:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .detail-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .detail-value {
+    font-size: 0.925rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: right;
+  }
+
+  /* ===== Badges & Mono Text ===== */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge.blue {
+    background: var(--badge-blue-bg);
+    color: var(--badge-blue-text);
+    border: 1px solid var(--badge-blue-border);
+  }
+
+  .badge.green {
+    background: var(--badge-green-bg);
+    color: var(--badge-green-text);
+    border: 1px solid var(--badge-green-border);
+  }
+
+  .mono-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  /* ===== Empty State ===== */
+  .empty-state {
+    text-align: center;
+    padding: 24px 12px 32px;
+  }
+
+  .empty-state h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  /* ===== Action Buttons ===== */
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .actions a {
+    text-decoration: none;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--brand-accent);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background: var(--brand-accent-hover);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-secondary {
+    background: #ffffff;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+
+  .btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+
+  .back {
+    margin-top: 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .btn-back {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    width: 100%;
+  }
+
+  .btn-back:hover {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .card { padding: 20px; }
+    .detail-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .detail-value { text-align: left; }
+    .actions { flex-direction: column; }
+    .actions a { width: 100%; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🛏 Room Details</h1>
+</div>
+
+<div class="container">
+  <div class="card">
+
+    {% if room %}
+    <div class="detail-list">
+      <div class="detail-row">
+        <span class="detail-label">Student Name</span>
+        <span class="detail-value">{{ room[0] }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Block</span>
+        <span class="detail-value mono-text">{{ room[5] }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Floor</span>
+        <span class="detail-value"><span class="badge blue">Floor {{ room[4] }}</span></span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Room Number</span>
+        <span class="detail-value mono-text">{{ room[1] }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Room Capacity</span>
+        <span class="detail-value mono-text">{{ room[2] }} Beds</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Occupied Beds</span>
+        <span class="detail-value mono-text">{{ room[3] }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label">Available Beds</span>
+        <span class="detail-value"><span class="badge green">{{ room[2] - room[3] }} Available</span></span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="/student/request_room_change">
+        <button class="btn btn-primary">
+          <span>🛏</span> Request Room Change
+        </button>
+      </a>
+
+      <a href="/student/room_change_status">
+        <button class="btn btn-secondary">
+          <span>📋</span> Room Change Status
+        </button>
+      </a>
+    </div>
+
+    {% else %}
+    <div class="empty-state">
+      <h3>No room has been assigned yet.</h3>
+    </div>
+    {% endif %}
+
+    <div class="back">
+      <a href="/student/dashboard" style="text-decoration: none;">
+        <button class="btn btn-back">
+          ⬅ Back to Dashboard
+        </button>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

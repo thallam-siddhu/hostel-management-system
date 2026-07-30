@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management System - Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="login-box">
+
+    <h1>🏨 Hostel Management System</h1>
+
+    <h2>Admin Dashboard</h2>
+
+    <p>Welcome, {{ session['admin'] }}</p>
+
+    <br>
+
+    <a href="/students">
+        <button type="button">👨‍🎓 Student Management</button>
+    </a>
+
+    <br><br>
+
+    <a href="/rooms">
+        <button type="button">🛏️ Room Management</button>
+    </a>
+
+    <br><br>
+
+    <a href="/fees">
+        <button type="button">💰 Fee Management</button>
+    </a>
+
+    <br><br>
+
+    <a href="/complaints">
+        <button type="button">📝 Complaint Management</button>
+    </a>
+
+    <br><br>
+
+    <a href="/visitors">
+        <button type="button">🚶 Visitor Management</button>
+    </a>
+
+    <br><br>
+
+    <a href="/reports">
+        <button type="button">📊 Reports</button>
+    </a>
+
+    <br><br>
+
+    <a href="/logout">
+        <button type="button">🚪 Logout</button>
+    </a>
+
+</div>
+
+</body>
+</html>

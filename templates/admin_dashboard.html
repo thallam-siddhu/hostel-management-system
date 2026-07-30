@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    
+    --brand-primary: #0f172a;
+    --brand-accent: #2563eb;
+    
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+
+    /* Category & State Accents */
+    --accent-green: #10b981;
+    --accent-orange: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-purple: #8b5cf6;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    background: var(--brand-primary);
+    color: #ffffff;
+    padding: 44px 24px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+  }
+
+  /* ===== Container ===== */
+  .container {
+    max-width: 1140px;
+    margin: -32px auto 48px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ===== Profile Strip ===== */
+  .profile {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 16px 24px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+  }
+
+  .profile h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .profile p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .profile span {
+    color: var(--brand-accent);
+    font-weight: 600;
+  }
+
+  /* ===== Sections ===== */
+  .section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== Grid Menu ===== */
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .menu a { 
+    text-decoration: none; 
+  }
+
+  .box {
+    min-height: 96px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+
+  .box .icon { 
+    font-size: 1.35rem; 
+  }
+
+  .box .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent, var(--border-color));
+    transition: background-color 0.2s ease;
+  }
+
+  .box:hover {
+    border-color: #cbd5e1;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  .box:hover .dot {
+    background: var(--brand-accent);
+  }
+
+  .box:focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+  }
+
+  /* Status Accents */
+  .box.green { --accent: var(--accent-green); }
+  .box.orange { --accent: var(--accent-orange); }
+  .box.red { --accent: var(--accent-red); }
+  .box.purple { --accent: var(--accent-purple); }
+
+  /* Logout Box Style */
+  .box.logout {
+    --accent: var(--accent-red);
+    background: #fff;
+    border-color: #fca5a5;
+    color: #dc2626;
+  }
+
+  .box.logout:hover {
+    background: #fef2f2;
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+
+  /* ===== Badges ===== */
+  .badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ef4444;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.5rem; }
+    .profile { flex-direction: column; align-items: flex-start; }
+    .menu { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="eyebrow">Hostel Management System</div>
+  <h1>🏫 Administrator Control Panel</h1>
+  <p>Welcome, {{ college_name }}</p>
+</div>
+
+<div class="container">
+
+  <div class="profile">
+    <h3>👨‍💼 Admin Dashboard</h3>
+    <p>College &nbsp;·&nbsp; <span>{{ college_name }}</span></p>
+  </div>
+
+  <!-- HOSTEL -->
+  <div class="section">
+    <h2>🏢 Hostel Management</h2>
+    <div class="menu">
+      <a href="{{ url_for('room_management') }}">
+        <div class="box"><span class="icon">🏢</span>Room Management<span class="dot"></span></div>
+      </a>
+      <a href="{{ url_for('add_student') }}">
+        <div class="box green"><span class="icon">➕</span>Add Student<span class="dot"></span></div>
+      </a>
+      <a href="{{ url_for('view_students') }}">
+        <div class="box"><span class="icon">👨‍🎓</span>View Students<span class="dot"></span></div>
+      </a>
+      <a href="/admin/room_change_management">
+        <div class="box orange"><span class="icon">🔄</span>Room Change<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- OUTING -->
+  <div class="section">
+    <h2>🚶 Outing Management</h2>
+    <div class="menu">
+      <a href="/admin/outing_requests">
+        <div class="box orange">
+          {% if pending_outings > 0 %}<span class="badge">{{ pending_outings }}</span>{% endif %}
+          <span class="icon">📋</span>Pending Requests<span class="dot"></span>
+        </div>
+      </a>
+      <a href="/admin/outing_history">
+        <div class="box"><span class="icon">📜</span>Outing History<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- MESS -->
+  <div class="section">
+    <h2>🍽 Mess Management</h2>
+    <div class="menu">
+      <a href="{{ url_for('admin_mess_management') }}">
+        <div class="box green"><span class="icon">🍛</span>Manage Mess Menu<span class="dot"></span></div>
+      </a>
+      <a href="/admin/food_feedback">
+        <div class="box"><span class="icon">⭐</span>Food Feedback<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- COMPLAINT -->
+  <div class="section">
+    <h2>📝 Complaint Management</h2>
+    <div class="menu">
+      <a href="/admin/complaints">
+        <div class="box red">
+          {% if pending_complaints > 0 %}<span class="badge">{{ pending_complaints }}</span>{% endif %}
+          <span class="icon">📝</span>View Complaints<span class="dot"></span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="section">
+    <h2>🛡 Security Management</h2>
+    <div class="menu">
+      <a href="/admin/add_security">
+        <div class="box green"><span class="icon">➕</span>Add Security<span class="dot"></span></div>
+      </a>
+      <a href="/admin/security">
+        <div class="box"><span class="icon">👮</span>View Security<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="section">
+    <h2>📢 Notice Management</h2>
+    <div class="menu">
+      <a href="/admin/notices">
+        <div class="box purple"><span class="icon">📢</span>Hostel Notices<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div class="section">
+    <h2>📊 Reports</h2>
+    <div class="menu">
+      <a href="/admin/reports">
+        <div class="box"><span class="icon">📊</span>Dashboard Report<span class="dot"></span></div>
+      </a>
+      <a href="/admin/promote_students">
+        <div class="box purple"><span class="icon">🎓</span>Student Promotion<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ACCOUNT -->
+  <div class="section">
+    <h2>⚙ Account</h2>
+    <div class="menu">
+      <a href="/admin/change_password">
+        <div class="box orange"><span class="icon">🔑</span>Change Password<span class="dot"></span></div>
+      </a>
+      <a href="/logout">
+        <div class="box logout"><span class="icon">🚪</span>Logout<span class="dot"></span></div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">© 2026 HOSTEL MANAGEMENT SYSTEM · ADMIN PANEL</div>
+
+</body>
+</html>

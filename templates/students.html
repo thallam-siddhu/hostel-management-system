@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+</head>
+<body>
+
+<h2>👨‍🎓 Student Management</h2>
+
+<a href="/admin/add_student">
+    <button>Add Student</button>
+</a>
+
+<br><br>
+
+<table border="1" cellpadding="8">
+
+<tr>
+
+<th>Register No</th>
+<th>Name</th>
+<th>Department</th>
+<th>Year</th>
+<th>Gender</th>
+<th>Mobile</th>
+<th>Block</th>
+<th>Floor</th>
+<th>Room</th>
+<th>Action</th>
+
+</tr>
+
+{% for student in students %}
+
+<tr>
+
+<td>{{ student[0] }}</td>
+<td>{{ student[1] }}</td>
+<td>{{ student[2] }}</td>
+<td>{{ student[3] }}</td>
+<td>{{ student[4] }}</td>
+<td>{{ student[5] }}</td>
+<td>{{ student[6] }}</td>
+<td>{{ student[7] }}</td>
+<td>{{ student[8] }}</td>
+
+<td>
+
+<a href="/admin/edit_student/{{ student[9] }}">
+<button>Edit</button>
+</a>
+
+<a href="/admin/delete_student/{{ student[9] }}"
+onclick="return confirm('Delete this student?')">
+
+<button>Delete</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

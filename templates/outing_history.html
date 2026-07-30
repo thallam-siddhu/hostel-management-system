@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>My Outing History</title>
+
+    <style>
+
+        body{
+            font-family:Arial, sans-serif;
+            background:#f4f6f9;
+            margin:0;
+            padding:0;
+        }
+
+        .header{
+            background:#2c3e50;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        .container{
+            width:95%;
+            max-width:1100px;
+            margin:30px auto;
+        }
+
+        .top-btn{
+            margin-bottom:20px;
+        }
+
+        .top-btn button{
+            background:#3498db;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:15px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            box-shadow:0px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        th{
+            background:#34495e;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            text-align:center;
+        }
+
+        tr:nth-child(even){
+            background:#f8f8f8;
+        }
+
+        .approved{
+            color:green;
+            font-weight:bold;
+        }
+
+        .pending{
+            color:orange;
+            font-weight:bold;
+        }
+
+        .rejected{
+            color:red;
+            font-weight:bold;
+        }
+
+        .out{
+            color:blue;
+            font-weight:bold;
+        }
+
+        .completed{
+            color:purple;
+            font-weight:bold;
+        }
+
+        .permission{
+            color:green;
+            font-size:17px;
+            font-weight:bold;
+        }
+
+        .back{
+            margin-top:25px;
+            text-align:center;
+        }
+
+        .back button{
+            background:#2c3e50;
+            color:white;
+            border:none;
+            padding:12px 25px;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🚶 My Outing History</h1>
+
+</div>
+
+<div class="container">
+
+<div class="top-btn">
+
+<a href="/student/outing">
+<button>➕ Apply New Outing</button>
+</a>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Outing Type</th>
+<th>Destination</th>
+<th>Out Date</th>
+<th>Return Date</th>
+<th>Status</th>
+<th>Permission ID</th>
+
+</tr>
+
+{% if outings %}
+
+{% for outing in outings %}
+
+<tr>
+
+<td>{{ outing[1] }}</td>
+
+<td>{{ outing[2] }}</td>
+
+<td>{{ outing[3] }}</td>
+
+<td>{{ outing[4] }}</td>
+
+<td>
+
+{% if outing[5]=="Approved" %}
+
+<span class="approved">
+✅ Approved
+</span>
+
+{% elif outing[5]=="Rejected" %}
+
+<span class="rejected">
+❌ Rejected
+</span>
+
+{% elif outing[5]=="Pending" %}
+
+<span class="pending">
+🟡 Pending
+</span>
+
+{% elif outing[5]=="Out" %}
+
+<span class="out">
+🚶 Out
+</span>
+
+{% elif outing[5]=="Completed" %}
+
+<span class="completed">
+🏠 Completed
+</span>
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if outing[6] %}
+
+<span class="permission">
+{{ outing[6] }}
+</span>
+
+{% else %}
+
+-
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="6">
+No Outing Requests Found.
+</td>
+
+</tr>
+
+{% endif %}
+
+</table>
+
+<div class="back">
+
+<a href="/student/dashboard">
+<button>⬅ Back to Dashboard</button>
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

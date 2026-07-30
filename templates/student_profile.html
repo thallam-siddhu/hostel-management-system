@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy-950: #0c1526;
+    --navy-800: #16233d;
+    --navy-700: #1e2f4f;
+    --brass: #c9a15a;
+    --brass-soft: #e4c98a;
+    --cream: #f6f1e6;
+    --cream-dim: #ece4d2;
+    --ink: #232323;
+    --slate: #7c879c;
+    --line: rgba(201,161,90,0.35);
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(201,161,90,0.10), transparent 45%),
+      radial-gradient(circle at 90% 85%, rgba(201,161,90,0.08), transparent 40%),
+      linear-gradient(180deg, var(--navy-950), var(--navy-800) 55%, #101b30 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+  }
+
+  .eyebrow{
+    position: fixed;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--brass-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .stage{
+    width: 100%;
+    max-width: 460px;
+    perspective: 1600px;
+  }
+
+  .id-card{
+    position: relative;
+    background: linear-gradient(160deg, var(--cream), var(--cream-dim));
+    border-radius: 22px;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,0.55),
+      0 10px 25px -10px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.6);
+    padding: 34px 32px 28px;
+    transform: rotate(-1.1deg);
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.5s ease;
+    animation: settle 0.7s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .id-card:hover{
+    transform: rotate(0deg) translateY(-6px) scale(1.01);
+    box-shadow:
+      0 40px 70px -18px rgba(0,0,0,0.6),
+      0 14px 30px -10px rgba(0,0,0,0.45),
+      inset 0 0 0 1px rgba(255,255,255,0.7);
+  }
+
+  @keyframes settle{
+    from{ opacity: 0; transform: rotate(-1.1deg) translateY(18px); }
+    to{ opacity: 1; transform: rotate(-1.1deg) translateY(0); }
+  }
+
+  .punch{
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    border-radius: 50%;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  }
+  .punch::after{
+    content:"";
+    position: absolute;
+    inset: 13px;
+    background: var(--navy-950);
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+  }
+
+  .card-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 22px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .institute{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--navy-700);
+    opacity: 0.75;
+  }
+  .badge-tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--brass);
+    background: var(--navy-950);
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .profile{
+    text-align: center;
+    margin-bottom: 26px;
+  }
+  .photo-frame{
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    padding: 4px;
+    background: conic-gradient(from 180deg, var(--brass), var(--brass-soft), var(--brass));
+    box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+  }
+  .photo-frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    border: 3px solid var(--cream);
+  }
+  .profile h2{
+    margin: 0 0 4px;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    letter-spacing: 0.2px;
+    color: var(--navy-950);
+  }
+  .profile .role{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .data{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .data .field{
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(30,47,79,0.08);
+    border-radius: 10px;
+    padding: 10px 13px;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .data .field:hover{
+    background: #ffffff;
+    transform: translateY(-2px);
+  }
+  .data .field.span-2{ grid-column: span 2; }
+  .field label{
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .field .val{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--navy-950);
+    letter-spacing: 0.3px;
+    word-break: break-word;
+  }
+
+  .barcode{
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 34px;
+    margin: 4px 2px 6px;
+    opacity: 0.85;
+  }
+  .barcode span{
+    flex: 1 1 auto;
+    background: var(--navy-950);
+  }
+  .barcode-caption{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--slate);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .back{
+    text-align: center;
+  }
+  .back a{ text-decoration: none; }
+  .back button{
+    width: 100%;
+    background: linear-gradient(160deg, var(--navy-800), var(--navy-950));
+    color: var(--cream);
+    border: 1px solid var(--line);
+    padding: 14px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  }
+  .back button:hover{
+    background: linear-gradient(160deg, var(--navy-700), var(--navy-950));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+  }
+  .back button:active{ transform: translateY(0); }
+  .back button:focus-visible{
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 420px){
+    .id-card{ padding: 30px 20px 24px; }
+    .data{ grid-template-columns: 1fr; }
+    .data .field.span-2{ grid-column: span 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .id-card, .id-card:hover, .data .field, .back button{
+      transition: none;
+      animation: none;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="eyebrow">Campus Identity · Hostel Records</div>
+
+<div class="stage">
+  <div class="id-card">
+    <div class="punch"></div>
+
+    <div class="card-head">
+      <span class="institute">Student ID Card</span>
+      <span class="badge-tag">Resident</span>
+    </div>
+
+    <div class="profile">
+      <div class="photo-frame">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile photo">
+      </div>
+      <h2>{{ student[1] }}</h2>
+      <div class="role">{{ student[2] }} · Year {{ student[3] }}</div>
+    </div>
+
+    <div class="data">
+      <div class="field">
+        <label>Register No.</label>
+        <div class="val">{{ student[0] }}</div>
+      </div>
+      <div class="field">
+        <label>Gender</label>
+        <div class="val">{{ student[4] }}</div>
+      </div>
+      <div class="field">
+        <label>Department</label>
+        <div class="val">{{ student[2] }}</div>
+      </div>
+      <div class="field">
+        <label>Year</label>
+        <div class="val">{{ student[3] }}</div>
+      </div>
+      <div class="field">
+        <label>Mobile</label>
+        <div class="val">{{ student[5] }}</div>
+      </div>
+      <div class="field">
+        <label>Room No.</label>
+        <div class="val">{{ room_no }}</div>
+      </div>
+    </div>
+
+    <div class="barcode" aria-hidden="true">
+      <span style="width:3px;"></span><span style="width:1px;"></span><span style="width:2px;"></span>
+      <span style="width:1px;"></span><span style="width:4px;"></span><span style="width:1px;"></span>
+      <span style="width:2px;"></span><span style="width:1px;"></span><span style="width:3px;"></span>
+      <span style="width:1px;"></span><span style="width:1px;"></span><span style="width:4px;"></span>
+      <span style="width:2px;"></span><span style="width:1px;"></span><span style="width:3px;"></span>
+      <span style="width:1px;"></span><span style="width:2px;"></span><span style="width:1px;"></span>
+      <span style="width:4px;"></span><span style="width:1px;"></span><span style="width:2px;"></span>
+      <span style="width:3px;"></span><span style="width:1px;"></span><span style="width:1px;"></span>
+    </div>
+    <div class="barcode-caption">
+      <span>{{ student[0] }}</span>
+      <span>Valid this term</span>
+    </div>
+
+    <div class="back">
+      <a href="/student/dashboard">
+        <button>← Back to Dashboard</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
