@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Edit Block</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:60px;
+}
+
+.card{
+    width:500px;
+    background:white;
+    padding:35px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    color:#333;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    margin-bottom:25px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#3498db;
+}
+
+.update-btn{
+    width:100%;
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.update-btn:hover{
+    background:#2980b9;
+}
+
+.back{
+    text-align:center;
+    margin-top:20px;
+}
+
+.back button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.back button:hover{
+    background:#1f2d3d;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#777;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>✏ Edit Block</h2>
+
+<form method="POST">
+
+<label>Block Name</label>
+
+<input
+type="text"
+name="block_name"
+value="{{ block[1] }}"
+placeholder="Enter Block Name"
+required>
+
+<button
+type="submit"
+class="update-btn">
+
+💾 Update Block
+
+</button>
+
+</form>
+
+<div class="back">
+
+<a href="/admin/blocks">
+
+<button type="button">
+
+⬅ Back to Block Management
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Block Management
+
+</div>
+
+</body>
+
+</html>

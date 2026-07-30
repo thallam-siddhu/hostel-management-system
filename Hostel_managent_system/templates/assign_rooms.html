@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Assign Room</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:50px;
+}
+
+.card{
+    width:500px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:10px;
+}
+
+.student-box{
+    background:#ecf0f1;
+    padding:12px;
+    border-left:5px solid #3498db;
+    border-radius:6px;
+    margin-bottom:25px;
+    font-size:17px;
+    color:#2c3e50;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+    color:#333;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    margin-bottom:25px;
+}
+
+select:focus{
+    outline:none;
+    border-color:#3498db;
+}
+
+.assign-btn{
+    width:100%;
+    padding:13px;
+    background:#27ae60;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.assign-btn:hover{
+    background:#229954;
+}
+
+.back{
+    text-align:center;
+    margin-top:20px;
+}
+
+.back a{
+    text-decoration:none;
+}
+
+.back button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:10px 25px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.back button:hover{
+    background:#1f2d3d;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#666;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🛏️ Assign Room</h2>
+
+<div class="student-box">
+
+<b>Student Register No :</b>
+
+{{ register_no }}
+
+</div>
+
+<form method="POST">
+
+<label>Select Room</label>
+
+<select name="room_id" required>
+
+{% for room in rooms %}
+
+<option value="{{ room[0] }}">
+
+🏢 Block {{ room[1] }} |
+🏬 {{ room[2] }} Floor |
+🚪 Room {{ room[3] }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+<button
+type="submit"
+class="assign-btn">
+
+✅ Assign Room
+
+</button>
+
+</form>
+
+<div class="back">
+
+<a href="/admin/students">
+
+<button type="button">
+
+⬅ Back to Student Management
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Room Assignment
+
+</div>
+
+</body>
+
+</html>

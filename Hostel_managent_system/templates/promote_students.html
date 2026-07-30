@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Promotion</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+    margin-bottom:30px;
+}
+
+h2{
+    color:#2c3e50;
+}
+
+label{
+    font-weight:bold;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:20px;
+}
+
+button{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#3498db;
+    color:white;
+    padding:12px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+.back{
+    text-align:center;
+    margin-top:30px;
+}
+
+.back button{
+    background:#2c3e50;
+}
+
+.back button:hover{
+    background:#1b2838;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🎓 Student Promotion</h1>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Promote Students</h2>
+
+<form method="POST">
+
+<label>Current Year</label>
+
+<select name="current_year" required>
+
+<option value="">Select</option>
+
+<option value="1">1st Year</option>
+
+<option value="2">2nd Year</option>
+
+<option value="3">3rd Year</option>
+
+<option value="4">4th Year</option>
+
+</select>
+
+<label>Promote To</label>
+
+<select name="new_year" required>
+
+<option value="">Select</option>
+
+<option value="2">2nd Year</option>
+
+<option value="3">3rd Year</option>
+
+<option value="4">4th Year</option>
+
+<option value="5">Completed</option>
+
+</select>
+
+<button type="submit">
+
+🎓 Promote Students
+
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>Student List</h2>
+
+<table>
+
+<tr>
+
+<th>Register No</th>
+
+<th>Name</th>
+
+<th>Department</th>
+
+<th>Current Year</th>
+
+</tr>
+
+{% for student in students %}
+
+<tr>
+
+<td>{{ student[0] }}</td>
+
+<td>{{ student[1] }}</td>
+
+<td>{{ student[2] }}</td>
+
+<td>
+
+{% if student[3] == "1" %}
+1st Year
+{% elif student[3] == "2" %}
+2nd Year
+{% elif student[3] == "3" %}
+3rd Year
+{% elif student[3] == "4" %}
+4th Year
+{% elif student[3] == "5" %}
+Completed
+{% else %}
+{{ student[3] }}
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+<div class="back">
+
+<a href="/admin/dashboard">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

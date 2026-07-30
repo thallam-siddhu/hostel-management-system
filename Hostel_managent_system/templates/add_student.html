@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Student</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin:40px 0;
+}
+
+.card{
+    width:700px;
+    background:#fff;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+    color:#333;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:18px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    border-color:#3498db;
+    outline:none;
+}
+
+.submit-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:6px;
+    background:#27ae60;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:#229954;
+}
+
+.back{
+    text-align:center;
+    margin-top:20px;
+}
+
+.back a{
+    text-decoration:none;
+}
+
+.back button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:10px 25px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.back button:hover{
+    background:#1f2d3d;
+}
+
+.footer{
+    text-align:center;
+    margin:35px;
+    color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+🏫 Hostel Management System
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>👨‍🎓 Add Student</h2>
+
+<form method="POST">
+
+<label>Register Number</label>
+<input type="text" name="register_no" placeholder="Enter Register Number" required>
+
+<label>Student Name</label>
+<input type="text" name="student_name" placeholder="Enter Student Name" required>
+
+<label>Department</label>
+<input type="text" name="department" placeholder="Enter Department" required>
+
+<label>Year</label>
+
+<select name="year" required>
+
+<option value="">Select Year</option>
+<option value="1">1st Year</option>
+<option value="2">2nd Year</option>
+<option value="3">3rd Year</option>
+<option value="4">4th Year</option>
+
+</select>
+
+<label>Gender</label>
+
+<select name="gender" required>
+
+<option value="">Select Gender</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+
+</select>
+
+<label>Mobile Number</label>
+<input type="tel"
+name="mobile"
+placeholder="Enter Mobile Number"
+maxlength="10"
+pattern="[0-9]{10}"
+required>
+
+<label>Password</label>
+<input type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<label>Select Block</label>
+
+<select name="block_id" id="block" required>
+
+<option value="">Select Block</option>
+
+{% for block in blocks %}
+
+<option value="{{ block[0] }}">
+{{ block[1] }}
+</option>
+
+{% endfor %}
+
+</select>
+
+<label>Select Floor</label>
+
+<select name="floor_id" id="floor" required>
+
+<option value="">Select Floor</option>
+
+</select>
+
+<label>Select Room</label>
+
+<select name="room_id" id="room" required>
+
+<option value="">Select Room</option>
+
+</select>
+
+<button class="submit-btn" type="submit">
+➕ Add Student
+</button>
+
+</form>
+
+<div class="back">
+
+<a href="/admin/students">
+
+<button type="button">
+⬅ Back to Student Management
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Student Management
+
+</div>
+
+<script>
+
+const block=document.getElementById("block");
+const floor=document.getElementById("floor");
+const room=document.getElementById("room");
+
+block.onchange=function(){
+
+floor.innerHTML="<option>Loading...</option>";
+room.innerHTML="<option>Select Room</option>";
+
+fetch("/get_floors/"+this.value)
+
+.then(response=>response.json())
+
+.then(data=>{
+
+floor.innerHTML="<option value=''>Select Floor</option>";
+
+data.forEach(function(item){
+
+floor.innerHTML+=`<option value="${item[0]}">${item[1]}</option>`;
+
+});
+
+});
+
+}
+
+floor.onchange=function(){
+
+room.innerHTML="<option>Loading...</option>";
+
+fetch("/get_rooms/"+this.value)
+
+.then(response=>response.json())
+
+.then(data=>{
+
+room.innerHTML="<option value=''>Select Room</option>";
+
+data.forEach(function(item){
+
+let available=item[2]-item[3];
+
+if(available>0){
+
+room.innerHTML+=`
+<option value="${item[0]}">
+${item[1]} (Available : ${available})
+</option>
+`;
+
+}
+
+});
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

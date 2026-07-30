@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Outing Report</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+h1{
+    text-align:center;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:8px;
+    text-align:center;
+}
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.approved{
+    color:green;
+    font-weight:bold;
+}
+
+.out{
+    color:blue;
+    font-weight:bold;
+}
+
+.completed{
+    color:purple;
+    font-weight:bold;
+}
+
+.rejected{
+    color:red;
+    font-weight:bold;
+}
+
+button{
+    padding:10px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🚶 Outing Report</h1>
+
+<table>
+
+<tr>
+
+<th>Register No</th>
+<th>Name</th>
+<th>Type</th>
+<th>Destination</th>
+<th>Out Date</th>
+<th>Return Date</th>
+<th>Permission ID</th>
+<th>Status</th>
+<th>Exit Time</th>
+<th>Entry Time</th>
+
+</tr>
+
+{% for outing in outings %}
+
+<tr>
+
+<td>{{ outing[0] }}</td>
+
+<td>{{ outing[1] }}</td>
+
+<td>{{ outing[2] }}</td>
+
+<td>{{ outing[3] }}</td>
+
+<td>{{ outing[4] }}</td>
+
+<td>{{ outing[5] }}</td>
+
+<td>{{ outing[6] or "-" }}</td>
+
+<td>
+
+{% if outing[7]=="Pending" %}
+<span class="pending">Pending</span>
+
+{% elif outing[7]=="Approved" %}
+<span class="approved">Approved</span>
+
+{% elif outing[7]=="Out" %}
+<span class="out">Out</span>
+
+{% elif outing[7]=="Completed" %}
+<span class="completed">Completed</span>
+
+{% elif outing[7]=="Rejected" %}
+<span class="rejected">Rejected</span>
+
+{% endif %}
+
+</td>
+
+<td>{{ outing[8] or "-" }}</td>
+
+<td>{{ outing[9] or "-" }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/admin/reports">
+<button>⬅ Back</button>
+</a>
+
+</body>
+
+</html>

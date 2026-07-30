@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Room Change Status</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+}
+
+td{
+    border:1px solid #ddd;
+    text-align:center;
+    padding:10px;
+}
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.approved{
+    color:green;
+    font-weight:bold;
+}
+
+.rejected{
+    color:red;
+    font-weight:bold;
+}
+
+button{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>📋 Room Change Status</h1>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<table>
+
+<tr>
+
+<th>ID</th>
+<th>Current Room</th>
+<th>Requested Room</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+{% if requests %}
+
+{% for request in requests %}
+
+<tr>
+
+<td>{{ request[0] }}</td>
+
+<td>{{ request[1] }}</td>
+
+<td>{{ request[2] }}</td>
+
+<td>{{ request[3] }}</td>
+
+<td>
+
+{% if request[4] == "Pending" %}
+
+<span class="pending">
+🟡 Pending
+</span>
+
+{% elif request[4] == "Approved" %}
+
+<span class="approved">
+✅ Approved
+</span>
+
+{% else %}
+
+<span class="rejected">
+❌ Rejected
+</span>
+
+{% endif %}
+
+</td>
+
+<td>{{ request[5] }}</td>
+
+</tr>
+
+{% endfor %}
+
+{% else %}
+
+<tr>
+
+<td colspan="6">
+
+No room change requests found.
+
+</td>
+
+</tr>
+
+{% endif %}
+
+</table>
+
+<br>
+
+<a href="/student/dashboard">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

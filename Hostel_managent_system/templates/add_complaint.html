@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Add Complaint</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    max-width:600px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+label{
+    font-weight:bold;
+}
+
+input,select,textarea{
+
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing:border-box;
+
+}
+
+textarea{
+    height:120px;
+}
+
+button{
+
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+
+}
+
+button:hover{
+
+    background:#2980b9;
+
+}
+
+.back{
+
+    background:#2c3e50;
+
+}
+
+.back:hover{
+
+    background:#1c2833;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>📝 Register Complaint</h1>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<form method="POST">
+
+<label>Complaint Type</label>
+
+<select name="complaint_type" required>
+
+<option value="">Select</option>
+
+<option>Electricity</option>
+
+<option>Water</option>
+
+<option>Room Cleaning</option>
+
+<option>Food</option>
+
+<option>Internet</option>
+
+<option>Furniture</option>
+
+<option>Security</option>
+
+<option>Others</option>
+
+</select>
+
+<label>Subject</label>
+
+<input
+type="text"
+name="subject"
+required>
+
+<label>Description</label>
+
+<textarea
+name="description"
+required></textarea>
+
+<button type="submit">
+
+Submit Complaint
+
+</button>
+
+</form>
+
+<br>
+
+<a href="/student/complaints">
+
+<button class="back">
+
+⬅ Back
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

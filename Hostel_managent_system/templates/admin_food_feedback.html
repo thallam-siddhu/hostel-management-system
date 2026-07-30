@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Food Feedback Management</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#f4f7fb;
+
+    padding:25px;
+
+}
+
+
+
+.container{
+
+    width:95%;
+
+    max-width:1300px;
+
+    margin:auto;
+
+}
+
+
+
+
+.header{
+
+    background:linear-gradient(
+        135deg,
+        #8e44ad,
+        #3498db
+    );
+
+    color:white;
+
+    padding:30px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+
+
+.header h1{
+
+    font-size:32px;
+
+}
+
+
+
+.header p{
+
+    margin-top:10px;
+
+}
+
+
+
+
+
+.rating-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+
+
+.rating-card h2{
+
+    color:#2c3e50;
+
+}
+
+
+
+.stars{
+
+    font-size:35px;
+
+    color:#f1c40f;
+
+    margin-top:10px;
+
+}
+
+
+
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+th{
+
+    background:#2c3e50;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+
+
+td{
+
+    padding:12px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+
+
+.review{
+
+    text-align:left;
+
+    max-width:300px;
+
+}
+
+
+
+.rating{
+
+    color:#f39c12;
+
+    font-size:20px;
+
+}
+
+
+
+
+.delete-btn{
+
+    background:#e74c3c;
+
+    color:white;
+
+    padding:10px 15px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+.delete-btn:hover{
+
+    background:#c0392b;
+
+}
+
+
+
+.no-data{
+
+    text-align:center;
+
+    color:gray;
+
+    padding:20px;
+
+}
+
+
+
+
+.back-btn{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    background:#34495e;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+
+
+
+@media(max-width:700px){
+
+
+table{
+
+font-size:12px;
+
+}
+
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+
+
+
+
+<div class="header">
+
+
+<h1>🍽️ Food Feedback Management</h1>
+
+<p>View student food reviews and ratings</p>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Average Rating -->
+
+
+<div class="rating-card">
+
+
+<h2>Overall Food Rating</h2>
+
+
+<div class="stars">
+
+
+{% for i in range(average_rating|int) %}
+
+⭐
+
+{% endfor %}
+
+
+</div>
+
+
+<h2>
+
+{{ average_rating }}/5
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>📋 Student Reviews</h2>
+
+
+<br>
+
+
+
+<table>
+
+
+<tr>
+
+<th>Student Name</th>
+
+<th>Rating</th>
+
+<th>Review</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+
+
+
+
+{% if feedbacks %}
+
+
+
+{% for feedback in feedbacks %}
+
+
+
+<tr>
+
+
+<td>
+
+{{ feedback[0] }}
+
+</td>
+
+
+
+
+<td class="rating">
+
+
+{% for i in range(feedback[1]) %}
+
+⭐
+
+{% endfor %}
+
+
+</td>
+
+
+
+
+
+<td class="review">
+
+
+{{ feedback[2] }}
+
+
+</td>
+
+
+
+
+
+<td>
+
+{{ feedback[3] }}
+
+</td>
+
+
+
+
+
+<td>
+
+
+<a href="{{ url_for('admin_delete_food_feedback', feedback_id=feedback[4]) }}"
+
+onclick="return confirm('Delete this review?');">
+
+
+<button class="delete-btn">
+
+🗑 Delete
+
+</button>
+
+
+</a>
+
+
+</td>
+
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="5" class="no-data">
+
+No food reviews available
+
+</td>
+
+</tr>
+
+
+
+{% endif %}
+
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<a class="back-btn"
+
+href="{{ url_for('admin_dashboard') }}">
+
+⬅ Back to Dashboard
+
+</a>
+
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>
