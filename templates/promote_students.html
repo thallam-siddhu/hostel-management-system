@@ -1,95 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Student Promotion</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Promote Students</title>
 
 <style>
 
-body{
+*{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f6f9;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
 }
 
 .header{
-    background:#2c3e50;
+
+    background:linear-gradient(135deg,#2c3e50,#34495e);
     color:white;
     text-align:center;
-    padding:20px;
+    padding:30px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+.header h1{
+
+    font-size:34px;
+
 }
 
 .container{
-    width:90%;
-    max-width:1100px;
-    margin:30px auto;
+
+    width:95%;
+    max-width:650px;
+    margin:40px auto;
+
 }
 
 .card{
+
     background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,.2);
-    margin-bottom:30px;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
 }
 
-h2{
+.card h2{
+
     color:#2c3e50;
+    border-left:6px solid #3498db;
+    padding-left:12px;
+    margin-bottom:30px;
+
 }
 
 label{
+
+    display:block;
+    margin-bottom:8px;
     font-weight:bold;
+    color:#2c3e50;
+
 }
 
 select{
+
     width:100%;
-    padding:10px;
-    margin-top:8px;
-    margin-bottom:20px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin-bottom:25px;
+    font-size:16px;
+
+}
+
+.info{
+
+    background:#fff8dc;
+    border-left:6px solid orange;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:25px;
+
 }
 
 button{
-    background:#3498db;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:5px;
-    cursor:pointer;
-}
 
-button:hover{
-    background:#2980b9;
-}
-
-table{
     width:100%;
-    border-collapse:collapse;
-}
-
-th{
-    background:#3498db;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
     color:white;
-    padding:12px;
+    margin-top:10px;
+
 }
 
-td{
-    border:1px solid #ddd;
-    padding:10px;
-    text-align:center;
+.promote{
+
+    background:#27ae60;
+
+}
+
+.promote:hover{
+
+    background:#229954;
+
 }
 
 .back{
-    text-align:center;
-    margin-top:30px;
+
+    background:#34495e;
+
 }
 
-.back button{
+.back:hover{
+
     background:#2c3e50;
+
 }
 
-.back button:hover{
-    background:#1b2838;
+.footer{
+
+    text-align:center;
+    color:#777;
+    margin-top:30px;
+
 }
 
 </style>
@@ -102,21 +148,23 @@ td{
 
 <h1>🎓 Student Promotion</h1>
 
+<p>Promote Students to Next Academic Year</p>
+
 </div>
 
 <div class="container">
 
 <div class="card">
 
-<h2>Promote Students</h2>
+<h2>Promotion Details</h2>
 
 <form method="POST">
 
 <label>Current Year</label>
 
-<select name="current_year" required>
+<select name="current_year" id="current_year" required>
 
-<option value="">Select</option>
+<option value="">Select Current Year</option>
 
 <option value="1">1st Year</option>
 
@@ -130,9 +178,9 @@ td{
 
 <label>Promote To</label>
 
-<select name="new_year" required>
+<select name="new_year" id="new_year" required>
 
-<option value="">Select</option>
+<option value="">Select New Year</option>
 
 <option value="2">2nd Year</option>
 
@@ -140,11 +188,30 @@ td{
 
 <option value="4">4th Year</option>
 
-<option value="5">Completed</option>
-
 </select>
 
-<button type="submit">
+<div class="info">
+
+<b>Note:</b>
+
+<ul>
+
+<li>1st Year → 2nd Year</li>
+
+<li>2nd Year → 3rd Year</li>
+
+<li>3rd Year → 4th Year</li>
+
+<li>4th Year → Completed (Student Deleted & Room Vacated)</li>
+
+</ul>
+
+</div>
+
+<button
+class="promote"
+type="submit"
+onclick="return confirm('Are you sure you want to promote these students?')">
 
 🎓 Promote Students
 
@@ -152,69 +219,15 @@ td{
 
 </form>
 
-</div>
+<br>
 
-<div class="card">
+<a href="/admin/students">
 
-<h2>Student List</h2>
+<button
+class="back"
+type="button">
 
-<table>
-
-<tr>
-
-<th>Register No</th>
-
-<th>Name</th>
-
-<th>Department</th>
-
-<th>Current Year</th>
-
-</tr>
-
-{% for student in students %}
-
-<tr>
-
-<td>{{ student[0] }}</td>
-
-<td>{{ student[1] }}</td>
-
-<td>{{ student[2] }}</td>
-
-<td>
-
-{% if student[3] == "1" %}
-1st Year
-{% elif student[3] == "2" %}
-2nd Year
-{% elif student[3] == "3" %}
-3rd Year
-{% elif student[3] == "4" %}
-4th Year
-{% elif student[3] == "5" %}
-Completed
-{% else %}
-{{ student[3] }}
-{% endif %}
-
-</td>
-
-</tr>
-
-{% endfor %}
-
-</table>
-
-</div>
-
-<div class="back">
-
-<a href="/admin/dashboard">
-
-<button>
-
-⬅ Back to Dashboard
+⬅ Back to Students
 
 </button>
 
@@ -223,6 +236,53 @@ Completed
 </div>
 
 </div>
+
+<div class="footer">
+
+© 2026 Hostel Management System
+
+</div>
+
+<script>
+
+let current=document.getElementById("current_year");
+let next=document.getElementById("new_year");
+
+current.onchange=function(){
+
+if(this.value=="1"){
+
+next.innerHTML="<option value='2'>2nd Year</option>";
+
+}
+
+else if(this.value=="2"){
+
+next.innerHTML="<option value='3'>3rd Year</option>";
+
+}
+
+else if(this.value=="3"){
+
+next.innerHTML="<option value='4'>4th Year</option>";
+
+}
+
+else if(this.value=="4"){
+
+next.innerHTML="<option value='completed'>Completed (Delete Students)</option>";
+
+}
+
+else{
+
+next.innerHTML="<option value=''>Select New Year</option>";
+
+}
+
+};
+
+</script>
 
 </body>
 

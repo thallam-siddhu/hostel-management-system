@@ -1,178 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
+<meta charset="UTF-8">
 <title>Room Change Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    /* Base Colors */
+    --bg-main: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f6f9;
-}
+    /* Primary Accent */
+    --brand-primary: #0f172a;
+    --brand-accent: #3b82f6;
 
-.header{
-    background:linear-gradient(135deg,#2c3e50,#34495e);
-    color:white;
-    text-align:center;
-    padding:25px;
-}
+    /* Subtle Elevation Shadows */
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.03), 0 1px 2px rgba(15, 23, 42, 0.02);
+    --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+    --shadow-hover: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
 
-.container{
-    width:90%;
-    max-width:900px;
-    margin:40px auto;
-}
+    /* Feature Cards Color Variants */
+    --accent-orange-bg: #fff7ed;
+    --accent-orange-text: #d97706;
+    --accent-orange-border: #fed7aa;
 
-.card{
-    background:white;
-    border-radius:12px;
-    padding:30px;
-    box-shadow:0 3px 12px rgba(0,0,0,.15);
-}
+    --accent-blue-bg: #eff6ff;
+    --accent-blue-text: #2563eb;
+    --accent-blue-border: #bfdbfe;
+  }
 
-.card h2{
-    text-align:center;
-    color:#2c3e50;
-    margin-bottom:30px;
-}
+  * { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+  }
 
-.menu{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
 
-.menu a{
-    text-decoration:none;
-}
+  /* ===== Premium Header ===== */
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 48px 24px 72px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-.box{
+  .header .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 10px;
+  }
 
-    background:linear-gradient(135deg,#3498db,#2980b9);
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
 
-    color:white;
+  /* ===== Container ===== */
+  .container {
+    max-width: 800px;
+    margin: -40px auto 48px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
 
-    text-align:center;
+  /* ===== Card Module ===== */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow-md);
+  }
 
-    border-radius:12px;
+  .card h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+  }
 
-    padding:35px;
+  /* ===== Grid Menu ===== */
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
 
-    font-size:20px;
+  .menu a { 
+    text-decoration: none; 
+  }
 
-    font-weight:bold;
+  .box {
+    min-height: 120px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-    transition:.3s;
+  .box .icon { 
+    font-size: 1.85rem; 
+  }
 
-}
+  .box .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border-color);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
 
-.box:hover{
+  .box:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+  }
 
-    transform:translateY(-5px);
+  .box:hover .dot {
+    transform: scale(1.25);
+  }
 
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
+  /* Card Color Variants */
+  .box.orange {
+    background: var(--accent-orange-bg);
+    border-color: var(--accent-orange-border);
+    color: var(--accent-orange-text);
+  }
+  .box.orange .dot { background: var(--accent-orange-text); }
 
-}
+  .box.blue {
+    background: var(--accent-blue-bg);
+    border-color: var(--accent-blue-border);
+    color: var(--accent-blue-text);
+  }
+  .box.blue .dot { background: var(--accent-blue-text); }
 
-.back{
+  /* ===== Back Button ===== */
+  .back {
+    text-align: center;
+    margin-top: 28px;
+  }
 
-    text-align:center;
+  .back a {
+    text-decoration: none;
+    display: inline-block;
+  }
 
-    margin-top:30px;
+  .back button {
+    background: #ffffff;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+  }
 
-}
+  .back button:hover {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    border-color: #cbd5e1;
+  }
 
-.back button{
-
-    background:#2c3e50;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 25px;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-}
-
-.back button:hover{
-
-    background:#1d2c3b;
-
-}
-
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.5rem; }
+    .card { padding: 24px 16px; }
+    .menu { grid-template-columns: 1fr; }
+  }
 </style>
-
 </head>
 
 <body>
 
 <div class="header">
-
-<h1>🏠 Room Change Management</h1>
-
+  <div class="eyebrow">Hostel Management System</div>
+  <h1>🏠 Room Change Management</h1>
 </div>
 
 <div class="container">
 
-<div class="card">
+  <div class="card">
+    <h2>Select an Action</h2>
 
-<h2>Select an Option</h2>
+    <div class="menu">
+      <a href="/admin/room_change_requests">
+        <div class="box orange">
+          <span class="icon">📋</span>
+          <span>Student Requests</span>
+          <span class="dot"></span>
+        </div>
+      </a>
 
-<div class="menu">
+      <a href="/admin/direct_change_room">
+        <div class="box blue">
+          <span class="icon">🔄</span>
+          <span>Direct Room Change</span>
+          <span class="dot"></span>
+        </div>
+      </a>
+    </div>
 
-<a href="/admin/room_change_requests">
-
-<div class="box">
-
-📋<br><br>
-
-Student Room Change Requests
-
-</div>
-
-</a>
-
-<a href="/admin/direct_change_room">
-
-<div class="box">
-
-🔄<br><br>
-
-Direct Room Change
-
-</div>
-
-</a>
-
-</div>
-
-<div class="back">
-
-<a href="/admin/dashboard">
-
-<button>
-
-⬅ Back to Dashboard
-
-</button>
-
-</a>
-
-</div>
-
-</div>
+    <div class="back">
+      <a href="/admin/dashboard">
+        <button type="button">
+          ⬅ Back to Dashboard
+        </button>
+      </a>
+    </div>
+  </div>
 
 </div>
 
 </body>
-
 </html>

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 
-<title>Add Floor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Room</title>
 
 <style>
 
@@ -11,111 +13,149 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:'Segoe UI',sans-serif;
 }
 
 body{
-    background:#f4f6f9;
+
+    background:#eef2f7;
+
 }
 
 .header{
-    background:#2c3e50;
+
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
     color:white;
-    text-align:center;
     padding:25px;
-    font-size:28px;
-    font-weight:bold;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+.header h1{
+
+    font-size:32px;
+
 }
 
 .container{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-top:60px;
+
+    width:95%;
+    max-width:650px;
+    margin:40px auto;
+
 }
 
 .card{
-    width:450px;
+
     background:white;
+    border-radius:18px;
     padding:35px;
-    border-radius:12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
 }
 
 .card h2{
-    text-align:center;
+
     color:#2c3e50;
     margin-bottom:25px;
+    border-left:6px solid #3498db;
+    padding-left:12px;
+
 }
 
 label{
-    display:block;
-    margin-bottom:8px;
+
     font-weight:bold;
-    color:#333;
+    color:#2c3e50;
+
 }
 
-select,
-input{
+input,
+select{
+
     width:100%;
-    padding:12px;
-    margin-bottom:20px;
+    padding:14px;
+    margin-top:8px;
+    margin-bottom:22px;
     border:1px solid #ccc;
-    border-radius:6px;
-    font-size:15px;
-}
-
-select:focus,
-input:focus{
-    outline:none;
-    border-color:#3498db;
-}
-
-.add-btn{
-    width:100%;
-    padding:12px;
-    background:#27ae60;
-    color:white;
-    border:none;
-    border-radius:6px;
+    border-radius:10px;
     font-size:16px;
+    outline:none;
+    transition:.3s;
+
+}
+
+input:focus,
+select:focus{
+
+    border-color:#3498db;
+    box-shadow:0 0 8px rgba(52,152,219,.3);
+
+}
+
+button{
+
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#3498db,#2980b9);
+    color:white;
+    font-size:18px;
     cursor:pointer;
     transition:.3s;
+
 }
 
-.add-btn:hover{
-    background:#229954;
+button:hover{
+
+    transform:translateY(-3px);
+
 }
 
 .back{
+
     text-align:center;
     margin-top:20px;
+
 }
 
 .back a{
+
     text-decoration:none;
+
 }
 
 .back button{
-    background:#2c3e50;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:6px;
-    cursor:pointer;
-    transition:.3s;
-}
 
-.back button:hover{
-    background:#1f2d3d;
+    width:220px;
+    background:#34495e;
+
 }
 
 .footer{
+
     text-align:center;
-    margin-top:40px;
+    padding:20px;
     color:#777;
-    font-size:14px;
+
+}
+
+@media(max-width:600px){
+
+.header h1{
+
+font-size:24px;
+
+}
+
+.card{
+
+padding:25px;
+
+}
+
 }
 
 </style>
@@ -126,7 +166,9 @@ input:focus{
 
 <div class="header">
 
-🏫 Hostel Management System
+<h1>🏫 Hostel Management System</h1>
+
+<p>Admin Panel</p>
 
 </div>
 
@@ -134,39 +176,54 @@ input:focus{
 
 <div class="card">
 
-<h2>🏬 Add New Floor</h2>
+<h2>🚪 Add New Room</h2>
 
 <form method="POST">
 
 <label>Select Block</label>
 
-<select name="block_id" required>
+<select name="block_id" id="block_id" required>
+
+<option value="">Choose Block</option>
 
 {% for block in blocks %}
 
 <option value="{{ block[0] }}">
-
 {{ block[1] }}
-
 </option>
 
 {% endfor %}
 
 </select>
 
-<label>Floor Name</label>
+<label>Select Floor</label>
+
+<select name="floor_id" id="floor_id" required>
+
+<option value="">Select Floor</option>
+
+</select>
+
+<label>Room Number</label>
 
 <input
 type="text"
-name="floor_name"
-placeholder="Example: Ground Floor / First Floor"
+name="room_no"
+placeholder="Example : 101"
 required>
 
-<button
-type="submit"
-class="add-btn">
+<label>Room Capacity</label>
 
-➕ Add Floor
+<input
+type="number"
+name="capacity"
+placeholder="Enter Capacity"
+min="1"
+required>
+
+<button type="submit">
+
+➕ Add Room
 
 </button>
 
@@ -174,11 +231,11 @@ class="add-btn">
 
 <div class="back">
 
-<a href="/admin/floors">
+<a href="/admin/rooms">
 
 <button type="button">
 
-⬅ Back to Floor Management
+⬅ Back to Room Management
 
 </button>
 
@@ -192,10 +249,58 @@ class="add-btn">
 
 <div class="footer">
 
-© 2026 Hostel Management System | Floor Management
+© 2026 Hostel Management System
 
 </div>
 
-</body>
+<script>
 
+document.getElementById("block_id").addEventListener("change",function(){
+
+let block_id=this.value;
+
+let floor=document.getElementById("floor_id");
+
+if(block_id==""){
+
+floor.innerHTML="<option value=''>Select Floor</option>";
+
+return;
+
+}
+
+floor.innerHTML="<option>Loading...</option>";
+
+fetch("/get_floors/"+block_id)
+
+.then(response=>response.json())
+
+.then(data=>{
+
+floor.innerHTML="<option value=''>Select Floor</option>";
+
+data.forEach(function(item){
+
+floor.innerHTML+=`
+<option value="${item[0]}">
+${item[1]}
+</option>`;
+
+});
+
+})
+
+.catch(error=>{
+
+floor.innerHTML="<option>No Floors Found</option>";
+
+console.log(error);
+
+});
+
+});
+
+</script>
+
+</body>
 </html>

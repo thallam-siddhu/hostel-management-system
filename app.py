@@ -169,22 +169,40 @@ def add_student():
 
     if request.method == "POST":
 
-        register_no = request.form["register_no"]
+        register_no = request.form["register_no"].strip()
         student_name = request.form["student_name"]
         department = request.form["department"]
         year = request.form["year"]
         gender = request.form["gender"]
         mobile = request.form["mobile"]
-
         password = generate_password_hash(request.form["password"])
-
         room_id = request.form["room_id"]
 
-        # Check Room Capacity
+        # -------------------------------
+        # Check duplicate register number
+        # -------------------------------
         cursor.execute("""
-        SELECT capacity, occupied
-        FROM rooms
-        WHERE id=?
+            SELECT id
+            FROM students
+            WHERE college_code=? AND register_no=?
+        """, (session["college_code"], register_no))
+
+        if cursor.fetchone():
+            conn.close()
+            return """
+            <script>
+                alert("Register Number already exists!");
+                window.location="/admin/add_student";
+            </script>
+            """
+
+        # -------------------------------
+        # Check Room Capacity
+        # -------------------------------
+        cursor.execute("""
+            SELECT capacity, occupied
+            FROM rooms
+            WHERE id=?
         """, (room_id,))
 
         room = cursor.fetchone()
@@ -193,28 +211,34 @@ def add_student():
             conn.close()
             return "Invalid Room."
 
-        capacity = room[0]
-        occupied = room[1]
+        capacity, occupied = room
 
         if occupied >= capacity:
             conn.close()
-            return "Room is Full."
+            return """
+            <script>
+                alert("Room is Full!");
+                window.location="/admin/add_student";
+            </script>
+            """
 
-        # Save Student
+        # -------------------------------
+        # Insert Student
+        # -------------------------------
         cursor.execute("""
-        INSERT INTO students
-        (
-            college_code,
-            register_no,
-            student_name,
-            department,
-            year,
-            gender,
-            mobile,
-            password,
-            room_id
-        )
-        VALUES(?,?,?,?,?,?,?,?,?)
+            INSERT INTO students
+            (
+                college_code,
+                register_no,
+                student_name,
+                department,
+                year,
+                gender,
+                mobile,
+                password,
+                room_id
+            )
+            VALUES (?,?,?,?,?,?,?,?,?)
         """,
         (
             session["college_code"],
@@ -228,11 +252,13 @@ def add_student():
             room_id
         ))
 
-        # Increase Occupied Count
+        # -------------------------------
+        # Update Room Occupancy
+        # -------------------------------
         cursor.execute("""
-        UPDATE rooms
-        SET occupied = occupied + 1
-        WHERE id=?
+            UPDATE rooms
+            SET occupied = occupied + 1
+            WHERE id=?
         """, (room_id,))
 
         conn.commit()
@@ -242,10 +268,10 @@ def add_student():
 
     # Load Blocks
     cursor.execute("""
-    SELECT id, block_name
-    FROM blocks
-    WHERE college_code=?
-    ORDER BY block_name
+        SELECT id, block_name
+        FROM blocks
+        WHERE college_code=?
+        ORDER BY block_name
     """, (session["college_code"],))
 
     blocks = cursor.fetchall()
@@ -256,7 +282,6 @@ def add_student():
         "add_student.html",
         blocks=blocks
     )
-
 
 # ===============================
 # VIEW STUDENTS
@@ -3184,85 +3209,61 @@ def promote_students():
     if "college_id" not in session:
         return redirect(url_for("admin_login"))
 
+    # Open the promotion page
+    if request.method == "GET":
+        return render_template("promote_students.html")
+
     conn = sqlite3.connect("hostel.db")
     cursor = conn.cursor()
 
-    if request.method == "POST":
+    current_year = int(request.form["current_year"])
+    new_year = request.form["new_year"]
 
-        current_year = request.form["current_year"]
-        new_year = request.form["new_year"]
+    # 4th Year Students
+    if current_year == 4:
 
-        valid_promotions = {
-            "1": "2",
-            "2": "3",
-            "3": "4",
-            "4": "5"
-        }
+        cursor.execute("""
+        SELECT id, room_id
+        FROM students
+        WHERE year=? AND college_code=?
+        """, (4, session["college_code"]))
 
-        if current_year not in valid_promotions:
-            conn.close()
-            return "Invalid Current Year"
+        students = cursor.fetchall()
 
-        if valid_promotions[current_year] != new_year:
-            conn.close()
-            return "Invalid Promotion"
+        for student in students:
+
+            student_id = student[0]
+            room_id = student[1]
+
+            if room_id:
+
+                cursor.execute("""
+                UPDATE rooms
+                SET occupied = occupied - 1
+                WHERE id=? AND occupied>0
+                """, (room_id,))
+
+            cursor.execute("""
+            DELETE FROM students
+            WHERE id=?
+            """, (student_id,))
+
+    else:
 
         cursor.execute("""
         UPDATE students
         SET year=?
-        WHERE college_code=? AND year=?
+        WHERE year=? AND college_code=?
         """, (
-            new_year,
-            session["college_code"],
-            current_year
-        ))
-
-        promoted_count = cursor.rowcount
-
-        cursor.execute("""
-        INSERT INTO promotion_history(
-            college_code,
-            from_year,
-            to_year,
-            promoted_count,
-            promoted_date
-        )
-        VALUES(?,?,?,?,?)
-        """, (
-            session["college_code"],
+            int(new_year),
             current_year,
-            new_year,
-            promoted_count,
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            session["college_code"]
         ))
 
-        conn.commit()
-
-        return redirect(url_for("promote_students"))
-
-    cursor.execute("""
-    SELECT
-        register_no,
-        student_name,
-        department,
-        year
-    FROM students
-    WHERE college_code=?
-    ORDER BY
-        CAST(year AS INTEGER),
-        student_name
-    """, (session["college_code"],))
-
-    students = cursor.fetchall()
-
+    conn.commit()
     conn.close()
 
-    return render_template(
-        "promote_students.html",
-        students=students
-    )
-
-
+    return redirect(url_for("view_students"))
 @app.route("/admin/edit_student/<int:student_id>", methods=["GET", "POST"])
 def edit_student(student_id):
 
