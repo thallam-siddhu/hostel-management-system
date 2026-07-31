@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Student Mess Menu</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+
+        .container {
+
+            width: 90%;
+            margin: auto;
+
+        }
+
+
+        h1 {
+
+            text-align: center;
+            color: #2c3e50;
+
+        }
+
+
+        .card {
+
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+
+            box-shadow: 0px 0px 10px #ccc;
+
+            margin-top: 25px;
+
+        }
+
+
+
+        table {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+
+        }
+
+
+
+        th {
+
+            background: #27ae60;
+            color: white;
+            padding: 12px;
+
+        }
+
+
+
+        td {
+
+            padding: 12px;
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+
+
+        tr:hover {
+
+            background: #f1f1f1;
+
+        }
+
+
+
+        .food {
+
+            text-align: left;
+
+        }
+
+
+
+        .no-data {
+
+            text-align: center;
+            color: gray;
+            font-size: 18px;
+
+        }
+
+
+
+        .back-btn {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            background: #34495e;
+
+            color: white;
+
+            padding: 10px 20px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="container">
+
+
+
+<h1>🍽️ Today's Mess Menu</h1>
+
+
+
+<div class="card">
+
+
+<table>
+
+
+<tr>
+
+<th>Day</th>
+
+<th>Breakfast</th>
+
+<th>Lunch</th>
+
+<th>Dinner</th>
+
+</tr>
+
+
+
+
+{% if menus %}
+
+
+
+{% for menu in menus %}
+
+
+
+<tr>
+
+
+<td>
+{{ menu[1] }}
+</td>
+
+
+
+<td class="food">
+
+{{ menu[2] }}
+
+</td>
+
+
+
+<td class="food">
+
+{{ menu[3] }}
+
+</td>
+
+
+
+<td class="food">
+
+{{ menu[4] }}
+
+</td>
+
+
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="4" class="no-data">
+
+Mess menu not available
+
+</td>
+
+</tr>
+
+
+
+{% endif %}
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+<a class="back-btn" href="{{ url_for('student_dashboard') }}">
+
+⬅ Back to Dashboard
+
+</a>
+
+
+
+</div>
+
+
+</body>
+
+</html>

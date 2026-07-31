@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>College Registration</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:50px 0;
+}
+
+.card{
+    width:450px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#3498db;
+}
+
+.register-btn{
+    width:100%;
+    padding:12px;
+    background:#27ae60;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.register-btn:hover{
+    background:#229954;
+}
+
+.login{
+    text-align:center;
+    margin-top:20px;
+}
+
+.login a{
+    text-decoration:none;
+    color:#3498db;
+    font-weight:bold;
+}
+
+.login a:hover{
+    text-decoration:underline;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#777;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🏫 College Registration</h2>
+
+<form method="POST">
+
+<label>College Name</label>
+
+<input
+type="text"
+name="college_name"
+placeholder="Enter College Name"
+required>
+
+<label>College Code</label>
+
+<input
+type="text"
+name="college_code"
+placeholder="Enter College Code"
+required>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Create Password"
+required>
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+name="confirm_password"
+placeholder="Confirm Password"
+required>
+
+<button
+type="submit"
+class="register-btn">
+
+✅ Register College
+
+</button>
+
+</form>
+
+<div class="login">
+
+Already Registered?
+
+<br><br>
+
+<a href="/admin/login">
+
+🔐 Login Here
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | College Registration Portal
+
+</div>
+
+</body>
+
+</html>

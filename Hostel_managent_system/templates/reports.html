@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Reports Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
+
+.header{
+    background:linear-gradient(135deg,#2c3e50,#34495e);
+    color:white;
+    text-align:center;
+    padding:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+.header h1{
+    margin-bottom:8px;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:30px auto;
+}
+
+.section-title{
+    text-align:center;
+    color:#2c3e50;
+    margin:30px 0 20px;
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+
+}
+
+.card h2{
+
+    color:#3498db;
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.card p{
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    color:#555;
+
+}
+
+.cards a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+.back{
+
+    text-align:center;
+
+    margin:40px 0;
+
+}
+
+.back button{
+
+    background:#2c3e50;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.back button:hover{
+
+    background:#1d2c3b;
+
+}
+
+.footer{
+
+    text-align:center;
+
+    color:#777;
+
+    padding:20px;
+
+    font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>📊 Reports Dashboard</h1>
+
+<p>Hostel Management System Reports</p>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title">
+
+📈 Overall Hostel Statistics
+
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h2>{{ total_students }}</h2>
+<p>👨‍🎓 Total Students</p>
+</div>
+
+<div class="card">
+<h2>{{ total_boys }}</h2>
+<p>👦 Total Boys</p>
+</div>
+
+<div class="card">
+<h2>{{ total_girls }}</h2>
+<p>👧 Total Girls</p>
+</div>
+
+<div class="card">
+<h2>{{ total_blocks }}</h2>
+<p>🏢 Total Blocks</p>
+</div>
+
+<div class="card">
+<h2>{{ total_floors }}</h2>
+<p>🏬 Total Floors</p>
+</div>
+
+<div class="card">
+<h2>{{ total_rooms }}</h2>
+<p>🚪 Total Rooms</p>
+</div>
+
+<div class="card">
+<h2>{{ total_capacity }}</h2>
+<p>🛏 Total Capacity</p>
+</div>
+
+<div class="card">
+<h2>{{ occupied_beds }}</h2>
+<p>🟢 Occupied Beds</p>
+</div>
+
+<div class="card">
+<h2>{{ vacant_beds }}</h2>
+<p>⚪ Vacant Beds</p>
+</div>
+
+<div class="card">
+<h2>{{ students_out }}</h2>
+<p>🚶 Students Currently Outside</p>
+</div>
+
+<div class="card">
+<h2>{{ pending_outings }}</h2>
+<p>🟡 Pending Outing Requests</p>
+</div>
+
+<div class="card">
+<h2>{{ pending_complaints }}</h2>
+<p>📝 Pending Complaints</p>
+</div>
+
+<div class="card">
+<h2>{{ total_security }}</h2>
+<p>🛡 Total Security Staff</p>
+</div>
+
+</div>
+
+<h2 class="section-title">
+
+📄 Detailed Reports
+
+</h2>
+
+<div class="cards">
+
+<a href="/admin/student_report">
+<div class="card">
+<h2>👨‍🎓</h2>
+<p>Student Report</p>
+</div>
+</a>
+
+<a href="/admin/room_report">
+<div class="card">
+<h2>🏢</h2>
+<p>Room Report</p>
+</div>
+</a>
+
+<a href="/admin/outing_report">
+<div class="card">
+<h2>🚶</h2>
+<p>Outing Report</p>
+</div>
+</a>
+
+<a href="/admin/complaint_report">
+<div class="card">
+<h2>📝</h2>
+<p>Complaint Report</p>
+</div>
+</a>
+
+<a href="/admin/security_report">
+<div class="card">
+<h2>🛡</h2>
+<p>Security Report</p>
+</div>
+</a>
+
+</div>
+
+<div class="back">
+
+<a href="/admin/dashboard">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Reports Dashboard
+
+</div>
+
+</body>
+
+</html>

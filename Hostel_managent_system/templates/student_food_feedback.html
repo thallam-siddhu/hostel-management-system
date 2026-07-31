@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Food Review & Feedback</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#f4f7fb;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+.container{
+
+    width:95%;
+
+    max-width:550px;
+
+}
+
+
+
+
+.card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+}
+
+
+
+.header{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.header h1{
+
+    color:#2c3e50;
+
+    font-size:28px;
+
+}
+
+
+.header p{
+
+    color:#777;
+
+    margin-top:10px;
+
+}
+
+
+
+
+label{
+
+    font-weight:bold;
+
+    color:#34495e;
+
+}
+
+
+
+
+
+/* STAR RATING */
+
+
+.rating{
+
+    display:flex;
+
+    flex-direction:row-reverse;
+
+    justify-content:center;
+
+    margin:20px 0;
+
+}
+
+
+
+.rating input{
+
+    display:none;
+
+}
+
+
+
+.rating label{
+
+    font-size:45px;
+
+    color:#ccc;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label{
+
+    color:#f1c40f;
+
+}
+
+
+
+
+
+textarea{
+
+    width:100%;
+
+    height:130px;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:12px;
+
+    resize:none;
+
+    font-size:15px;
+
+}
+
+
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#27ae60;
+
+}
+
+
+
+
+
+button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+    135deg,
+    #11998e,
+    #38ef7d
+    );
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+
+
+
+
+.back{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:#34495e;
+
+    font-weight:bold;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+
+<div class="header">
+
+<h1>🍽️ Food Review</h1>
+
+<p>Rate today's hostel food and share your experience</p>
+
+</div>
+
+
+
+
+
+<form method="POST"
+action="{{ url_for('student_food_feedback') }}">
+
+
+
+
+
+<label>
+
+⭐ Rate Food Quality
+
+</label>
+
+
+
+<div class="rating">
+
+
+<input type="radio" 
+id="star5"
+name="rating"
+value="5"
+required>
+
+<label for="star5">★</label>
+
+
+
+<input type="radio"
+id="star4"
+name="rating"
+value="4">
+
+<label for="star4">★</label>
+
+
+
+<input type="radio"
+id="star3"
+name="rating"
+value="3">
+
+<label for="star3">★</label>
+
+
+
+<input type="radio"
+id="star2"
+name="rating"
+value="2">
+
+<label for="star2">★</label>
+
+
+
+<input type="radio"
+id="star1"
+name="rating"
+value="1">
+
+<label for="star1">★</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+<label>
+
+📝 Write Your Review
+
+</label>
+
+
+
+<textarea
+
+name="review"
+
+placeholder="Share your food experience..."
+
+required></textarea>
+
+
+
+
+
+
+
+<button type="submit">
+
+Submit Review ⭐
+
+</button>
+
+
+
+</form>
+
+
+
+
+
+<a class="back"
+href="{{ url_for('student_dashboard') }}">
+
+⬅ Back to Dashboard
+
+</a>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

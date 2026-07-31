@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Hostel Notices</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+    margin-bottom:30px;
+}
+
+.card h2{
+    text-align:center;
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+    color:#333;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+input:focus,
+textarea:focus{
+    outline:none;
+    border-color:#3498db;
+}
+
+.publish-btn{
+    width:100%;
+    padding:12px;
+    background:#27ae60;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.publish-btn:hover{
+    background:#229954;
+}
+
+.notice-card{
+    background:white;
+    padding:20px;
+    border-left:6px solid #3498db;
+    border-radius:8px;
+    margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.notice-card h3{
+    color:#2c3e50;
+    margin-bottom:10px;
+}
+
+.notice-card p{
+    color:#444;
+    line-height:1.6;
+    margin-bottom:12px;
+}
+
+.notice-date{
+    color:#777;
+    font-size:14px;
+}
+
+.back{
+    text-align:center;
+    margin-top:30px;
+}
+
+.back a{
+    text-decoration:none;
+}
+
+.back button{
+    background:#2c3e50;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.back button:hover{
+    background:#1f2d3d;
+}
+
+.footer{
+    text-align:center;
+    margin:40px;
+    color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+🏫 Hostel Management System
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📢 Publish Hostel Notice</h2>
+
+<form method="POST">
+
+<label>Notice Title</label>
+
+<input
+type="text"
+name="title"
+placeholder="Enter Notice Title"
+required>
+
+<label>Notice Message</label>
+
+<textarea
+name="message"
+rows="6"
+placeholder="Enter Notice Details"
+required></textarea>
+
+<button
+type="submit"
+class="publish-btn">
+
+📢 Publish Notice
+
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>📋 Published Notices</h2>
+
+{% if notices %}
+
+{% for notice in notices %}
+
+<div class="notice-card">
+
+<h3>📌 {{ notice[1] }}</h3>
+
+<p>{{ notice[2] }}</p>
+
+<div class="notice-date">
+
+🕒 Published On : {{ notice[3] }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p style="text-align:center;color:gray;font-size:18px;">
+
+No notices published yet.
+
+</p>
+
+{% endif %}
+
+</div>
+
+<div class="back">
+
+<a href="/admin/dashboard">
+
+<button>
+
+⬅ Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Hostel Management System | Notice Board
+
+</div>
+
+</body>
+
+</html>

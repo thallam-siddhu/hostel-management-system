@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Room Occupancy Report</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+h1{
+    text-align:center;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+}
+
+td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+.available{
+    color:green;
+    font-weight:bold;
+}
+
+.full{
+    color:red;
+    font-weight:bold;
+}
+
+button{
+    padding:10px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🏢 Room Occupancy Report</h1>
+
+<table>
+
+<tr>
+
+<th>Block</th>
+<th>Floor</th>
+<th>Room</th>
+<th>Capacity</th>
+<th>Occupied</th>
+<th>Vacant</th>
+<th>Status</th>
+
+</tr>
+
+{% for room in rooms %}
+
+<tr>
+
+<td>{{ room[0] }}</td>
+
+<td>{{ room[1] }}</td>
+
+<td>{{ room[2] }}</td>
+
+<td>{{ room[3] }}</td>
+
+<td>{{ room[4] }}</td>
+
+<td>{{ room[5] }}</td>
+
+<td>
+
+{% if room[5] > 0 %}
+
+<span class="available">
+
+Available
+
+</span>
+
+{% else %}
+
+<span class="full">
+
+Full
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/admin/reports">
+
+<button>
+
+⬅ Back
+
+</button>
+
+</a>
+
+</body>
+
+</html>
