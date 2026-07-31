@@ -2,478 +2,558 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>Student Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | Hostel Management System</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-  :root {
-    --bg-main: #f8fafc;
-    --card-bg: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    
-    --brand-primary: #1e293b;
-    --brand-accent: #3b82f6;
-    
-    --border-color: #e2e8f0;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-    /* Notification & Badge Colors */
-    --success-bg: #f0fdf4;
-    --success-border: #bbf7d0;
-    --success-text: #15803d;
+    body {
+      min-height: 100vh;
+      background: #0f172a; /* Deep dark slate base */
+      color: #f8fafc;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-    --warning-bg: #fffbeb;
-    --warning-border: #fef08a;
-    --warning-text: #b45309;
+    /* Ambient Glow Background Orbs (Emerald Theme for Students) */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.45;
+      z-index: 1;
+      animation: float 14s ease-in-out infinite alternate;
+    }
 
-    --info-bg: #f1f5f9;
-    --info-border: #e2e8f0;
-    --info-text: #475569;
-  }
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      top: -150px;
+      left: -150px;
+    }
 
-  * { 
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
-  }
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -7s;
+    }
 
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 35px) scale(1.05); }
+    }
 
-  /* ===== Header ===== */
-  .header {
-    background: var(--brand-primary);
-    color: #ffffff;
-    padding: 48px 24px 64px;
-    text-align: center;
-    position: relative;
-  }
+    /* ===== Header ===== */
+    .header {
+      position: relative;
+      z-index: 10;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 24px 60px;
+      text-align: center;
+    }
 
-  .header .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #94a3b8;
-    margin-bottom: 8px;
-  }
+    .header .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #34d399;
+      margin-bottom: 8px;
+    }
 
-  .header h1 {
-    font-size: 1.875rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin-bottom: 8px;
-  }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
 
-  .header .welcome {
-    font-size: 0.95rem;
-    color: #cbd5e1;
-  }
+    .header .welcome {
+      font-size: 0.95rem;
+      color: #94a3b8;
+    }
 
-  .header .welcome b {
-    color: #ffffff;
-    font-weight: 600;
-  }
+    .header .welcome b {
+      color: #f8fafc;
+      font-weight: 600;
+    }
 
-  /* ===== Main Container ===== */
-  .container {
-    max-width: 1080px;
-    margin: -32px auto 48px;
-    padding: 0 20px;
-    position: relative;
-    z-index: 10;
-  }
+    /* ===== Main Container ===== */
+    .container {
+      max-width: 1080px;
+      margin: -28px auto 48px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
 
-  /* ===== Cards ===== */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-  }
+    /* ===== Cards ===== */
+    .card {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
 
-  .card h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* ===== Notifications & Permission Gate Pass ===== */
-  .notice {
-    border-radius: 8px;
-    padding: 20px;
-    border: 1px solid transparent;
-  }
+    .card h2 i {
+      color: #34d399;
+    }
 
-  .notice h3 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
+    /* ===== Notifications & Permission Gate Pass ===== */
+    .notice {
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-  .notice p {
-    font-size: 0.875rem;
-  }
+    .notice-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .notice.success { 
-    background-color: var(--success-bg); 
-    border-color: var(--success-border); 
-  }
-  .notice.success h3, .notice.success p { color: var(--success-text); }
+    .notice h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
 
-  .notice.pending { 
-    background-color: var(--warning-bg); 
-    border-color: var(--warning-border); 
-  }
-  .notice.pending h3, .notice.pending p { color: var(--warning-text); }
+    .notice p {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
 
-  .notice.normal { 
-    background-color: var(--info-bg); 
-    border-color: var(--info-border); 
-  }
-  .notice.normal h3, .notice.normal p { color: var(--info-text); }
+    .notice.success {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #34d399;
+    }
 
-  .permission {
-    margin-top: 16px;
-    text-align: center;
-    background: #ffffff;
-    border: 2px dashed #cbd5e1;
-    border-radius: 8px;
-    padding: 20px;
-  }
+    .notice.pending {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: #fbbf24;
+    }
 
-  .permission .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+    .notice.normal {
+      background: rgba(100, 116, 139, 0.15);
+      border-color: rgba(100, 116, 139, 0.3);
+      color: #cbd5e1;
+    }
 
-  .permission h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2.25rem;
-    font-weight: 600;
-    color: var(--brand-primary);
-    letter-spacing: 0.05em;
-    margin: 6px 0;
-  }
+    /* Digital Pass Display Card */
+    .permission {
+      margin-top: 16px;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px dashed rgba(52, 211, 153, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+    }
 
-  .permission p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
+    .permission .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
 
-  /* ===== Overview Stats ===== */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
+    .permission h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #34d399;
+      letter-spacing: 0.08em;
+      margin: 8px 0;
+      text-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+    }
 
-  .stat {
-    background: #f8fafc;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-  }
+    .permission p {
+      font-size: 0.825rem;
+      color: #94a3b8;
+    }
 
-  .stat .num {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brand-primary);
-    line-height: 1;
-  }
+    /* ===== Overview Stats ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
 
-  .stat .label {
-    margin-top: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+    .stat {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.25s ease;
+    }
 
-  /* ===== Services Directory Grid ===== */
-  .menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
-  }
+    .stat:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
 
-  .menu a { 
-    text-decoration: none; 
-  }
+    .stat .num {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-  .box {
-    min-height: 110px;
-    border-radius: 8px;
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.2s ease;
-    position: relative;
-  }
+    .stat .label {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
 
-  .box .icon {
-    font-size: 1.5rem;
-  }
+    /* ===== Services Directory Grid ===== */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
 
-  .box .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--border-color);
-    transition: background-color 0.2s ease;
-  }
+    .menu a {
+      text-decoration: none;
+    }
 
-  .box:hover {
-    border-color: #cbd5e1;
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
+    .box {
+      min-height: 120px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
 
-  .box:hover .dot {
-    background: var(--brand-accent);
-  }
+    .box .icon {
+      font-size: 1.6rem;
+      color: #94a3b8;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
 
-  .box:focus-visible {
-    outline: 2px solid var(--brand-accent);
-    outline-offset: 2px;
-  }
+    .box .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
 
-  /* Accent highlights for key services */
-  .box.emphasis .dot { background: #ef4444; }
-  .box.progress .dot { background: #f59e0b; }
-  .box.thrive .dot { background: #10b981; }
-  .box.reflect .dot { background: #8b5cf6; }
+    .box:hover {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+      color: #ffffff;
+    }
 
-  /* ===== Logout Button ===== */
-  .logout { 
-    text-align: center; 
-    margin-top: 24px; 
-  }
+    .box:hover .icon {
+      color: #34d399;
+      transform: scale(1.1);
+    }
 
-  .logout button {
-    background: #ffffff;
-    color: #dc2626;
-    border: 1px solid #fca5a5;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
+    .box:hover .dot {
+      background: #34d399;
+      box-shadow: 0 0 8px #34d399;
+    }
 
-  .logout button:hover {
-    background: #fef2f2;
-    border-color: #dc2626;
-  }
+    /* Accent highlights for key services */
+    .box.emphasis .dot { background: #f87171; }
+    .box.emphasis:hover .icon { color: #f87171; }
 
-  /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
+    .box.progress .dot { background: #fbbf24; }
+    .box.progress:hover .icon { color: #fbbf24; }
 
-  @media (max-width: 640px) {
-    .header h1 { font-size: 1.5rem; }
-    .permission h1 { font-size: 1.75rem; }
-    .menu { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    .box.thrive .dot { background: #34d399; }
+    .box.thrive:hover .icon { color: #34d399; }
+
+    .box.reflect .dot { background: #a78bfa; }
+    .box.reflect:hover .icon { color: #a78bfa; }
+
+    /* ===== Logout Button ===== */
+    .logout {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .logout a {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .logout button {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+
+    .logout button:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.5rem; }
+      .permission h1 { font-size: 1.75rem; }
+      .menu { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-  <div class="eyebrow">Hostel Management System</div>
-  <h1>🎓 Student Control Panel</h1>
-  <p class="welcome">Welcome back, <b>{{ student_name }}</b></p>
-</div>
+  <!-- Ambient Glow Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">Hostel Management System</div>
+    <h1><i class="fa-solid fa-graduation-cap"></i> Student Control Panel</h1>
+    <p class="welcome">Welcome back, <b>{{ student_name }}</b></p>
+  </div>
 
-  <!-- Notifications -->
-  <div class="card">
-    <h2>🔔 Notifications</h2>
+  <div class="container">
 
-    {% if approved_outing %}
-    <div class="notice success">
-      <h3>✅ Outing Approved</h3>
-      <p>Your outing request has been approved by Admin.</p>
+    <!-- Notifications -->
+    <div class="card">
+      <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
 
-      {% if permission_id %}
-      <div class="permission">
-        <div class="tag">Permission ID</div>
-        <h1>{{ permission_id }}</h1>
-        <p>Show this ID to Security during exit and entry.</p>
+      {% if approved_outing %}
+      <div class="notice success">
+        <div class="notice-header">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3>Outing Approved</h3>
+        </div>
+        <p>Your outing request has been approved by Admin.</p>
+
+        {% if permission_id %}
+        <div class="permission">
+          <div class="tag">Gate Permission Pass ID</div>
+          <h1>{{ permission_id }}</h1>
+          <p>Present this pass ID to Security during gate exit and entry verification.</p>
+        </div>
+        {% endif %}
+      </div>
+
+      {% elif pending > 0 %}
+      <div class="notice pending">
+        <div class="notice-header">
+          <i class="fa-solid fa-clock"></i>
+          <h3>Pending Outing Request</h3>
+        </div>
+        <p>Your outing request is currently awaiting administrator review.</p>
+      </div>
+
+      {% else %}
+      <div class="notice normal">
+        <div class="notice-header">
+          <i class="fa-solid fa-inbox"></i>
+          <h3>No New Notifications</h3>
+        </div>
+        <p>All clear! You have no pending requests or security notices.</p>
       </div>
       {% endif %}
     </div>
 
-    {% elif pending > 0 %}
-    <div class="notice pending">
-      <h3>🟡 Pending Request</h3>
-      <p>Your outing request is waiting for approval.</p>
-    </div>
-
-    {% else %}
-    <div class="notice normal">
-      <h3>📢 No Notifications</h3>
-      <p>No new updates available.</p>
-    </div>
-    {% endif %}
-  </div>
-
-  <!-- Overview -->
-  <div class="card">
-    <h2>📊 Quick Overview</h2>
-    <div class="stats">
-      <div class="stat">
-        <div class="num">{{ pending }}</div>
-        <div class="label">Pending Outings</div>
-      </div>
-      <div class="stat">
-        <div class="num">{% if approved_outing %}1{% else %}0{% endif %}</div>
-        <div class="label">Approved Outings</div>
+    <!-- Overview -->
+    <div class="card">
+      <h2><i class="fa-solid fa-chart-pie"></i> Quick Overview</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">{{ pending }}</div>
+          <div class="label">Pending Outings</div>
+        </div>
+        <div class="stat">
+          <div class="num">{% if approved_outing %}1{% else %}0{% endif %}</div>
+          <div class="label">Approved Outings</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Services -->
-  <div class="card">
-    <h2>🎯 Student Services</h2>
-    <div class="menu">
+    <!-- Services -->
+    <div class="card">
+      <h2><i class="fa-solid fa-grid-2"></i> Student Services</h2>
+      <div class="menu">
 
-      <a href="/student/profile">
-        <div class="box">
-          <span class="icon">👤</span>
-          My Profile
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/profile">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-user-gear"></i></span>
+            My Profile
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/outing">
-        <div class="box progress">
-          <span class="icon">🚶</span>
-          Apply Outing
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/outing">
+          <div class="box progress">
+            <span class="icon"><i class="fa-solid fa-person-walking-luggage"></i></span>
+            Apply Outing
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/outing_history">
-        <div class="box">
-          <span class="icon">📋</span>
-          Outing History
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/outing_history">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+            Outing History
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/complaints">
-        <div class="box emphasis">
-          <span class="icon">📝</span>
-          Complaints
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/complaints">
+          <div class="box emphasis">
+            <span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>
+            Complaints
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/room_details">
-        <div class="box">
-          <span class="icon">🛏</span>
-          Room Details
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/room_details">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-bed"></i></span>
+            Room Details
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/roommates">
-        <div class="box">
-          <span class="icon">👥</span>
-          Roommates
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/roommates">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-users"></i></span>
+            Roommates
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/notices">
-        <div class="box">
-          <span class="icon">📢</span>
-          Hostel Notices
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/notices">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-bullhorn"></i></span>
+            Hostel Notices
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="{{ url_for('student_mess') }}">
-        <div class="box thrive">
-          <span class="icon">🍽️</span>
-          Mess Menu
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="{{ url_for('student_mess') }}">
+          <div class="box thrive">
+            <span class="icon"><i class="fa-solid fa-utensils"></i></span>
+            Mess Menu
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="{{ url_for('student_food_feedback') }}">
-        <div class="box reflect">
-          <span class="icon">⭐</span>
-          Food Review
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="{{ url_for('student_food_feedback') }}">
+          <div class="box reflect">
+            <span class="icon"><i class="fa-solid fa-star"></i></span>
+            Food Review
+            <span class="dot"></span>
+          </div>
+        </a>
 
-      <a href="/student/change_password">
-        <div class="box progress">
-          <span class="icon">🔑</span>
-          Change Password
-          <span class="dot"></span>
-        </div>
-      </a>
+        <a href="/student/change_password">
+          <div class="box progress">
+            <span class="icon"><i class="fa-solid fa-key"></i></span>
+            Change Password
+            <span class="dot"></span>
+          </div>
+        </a>
 
+      </div>
     </div>
+
+    <!-- Logout Action -->
+    <div class="logout">
+      <a href="/logout">
+        <button type="button">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+        </button>
+      </a>
+    </div>
+
   </div>
 
-  <div class="logout">
-    <a href="/logout">
-      <button>🚪 Logout</button>
-    </a>
+  <div class="footer">
+    © 2026 HOSTEL MANAGEMENT SYSTEM • STUDENT CONTROL PANEL
   </div>
-
-</div>
-
-<div class="footer">© 2026 HOSTEL MANAGEMENT SYSTEM · STUDENT PANEL</div>
 
 </body>
 </html>

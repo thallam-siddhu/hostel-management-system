@@ -2,435 +2,529 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Hostel Management System</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-  :root {
-    /* Base Neutral Palette */
-    --bg-main: #f1f5f9;
-    --card-bg: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --border-color: #e2e8f0;
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-    /* Primary Accent */
-    --brand-primary: #0f172a;
-    --brand-accent: #3b82f6;
+    body {
+      min-height: 100vh;
+      background: #0f172a; /* Deep dark slate base */
+      color: #f8fafc;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-    /* Subtle Elevation Shadows */
-    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.03), 0 1px 2px rgba(15, 23, 42, 0.02);
-    --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-    --shadow-hover: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+    /* Ambient Glow Background Orbs (Indigo & Sky Blue Theme for Admin) */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.45;
+      z-index: 1;
+      animation: float 14s ease-in-out infinite alternate;
+    }
 
-    /* Refined Color Badges & Accents */
-    --accent-green-bg: #ecfdf5;
-    --accent-green-text: #059669;
-    --accent-green-border: #a7f3d0;
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      top: -150px;
+      left: -150px;
+    }
 
-    --accent-orange-bg: #fff7ed;
-    --accent-orange-text: #d97706;
-    --accent-orange-border: #fed7aa;
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #6366f1, #4338ca);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -7s;
+    }
 
-    --accent-red-bg: #fef2f2;
-    --accent-red-text: #dc2626;
-    --accent-red-border: #fca5a5;
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 35px) scale(1.05); }
+    }
 
-    --accent-purple-bg: #f5f3ff;
-    --accent-purple-text: #7c3aed;
-    --accent-purple-border: #ddd6fe;
+    /* ===== Premium Header ===== */
+    .header {
+      position: relative;
+      z-index: 10;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 24px 60px;
+      text-align: center;
+    }
 
-    --accent-blue-bg: #eff6ff;
-    --accent-blue-text: #2563eb;
-    --accent-blue-border: #bfdbfe;
-  }
+    .header .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
 
-  * { 
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
-  }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
 
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+    .header p {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      font-weight: 400;
+    }
 
-  /* ===== Premium Header ===== */
-  .header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #ffffff;
-    padding: 48px 24px 72px;
-    text-align: center;
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
+    /* ===== Container ===== */
+    .container {
+      max-width: 1140px;
+      margin: -28px auto 48px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
 
-  .header .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #38bdf8;
-    margin-bottom: 10px;
-  }
+    /* ===== Profile Strip ===== */
+    .profile {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 28px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      margin-bottom: 24px;
+    }
 
-  .header h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
-  }
+    .profile h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .header p {
-    font-size: 0.95rem;
-    color: #94a3b8;
-    font-weight: 400;
-  }
+    .profile h3 i {
+      color: #38bdf8;
+    }
 
-  /* ===== Container ===== */
-  .container {
-    max-width: 1140px;
-    margin: -40px auto 48px;
-    padding: 0 20px;
-    position: relative;
-    z-index: 10;
-  }
+    .profile p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
 
-  /* ===== Profile Strip ===== */
-  .profile {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 18px 24px;
-    border-radius: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    box-shadow: var(--shadow-md);
-    margin-bottom: 24px;
-  }
+    .profile span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
 
-  .profile h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    /* ===== Sections ===== */
+    .section {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.25s ease;
+    }
 
-  .profile p {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.825rem;
-    color: var(--text-secondary);
-  }
+    .section:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
 
-  .profile span {
-    color: var(--brand-accent);
-    font-weight: 600;
-  }
+    .section h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  /* ===== Sections ===== */
-  .section {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
-    transition: box-shadow 0.2s ease;
-  }
+    .section h2 i {
+      color: #38bdf8;
+    }
 
-  .section:hover {
-    box-shadow: var(--shadow-md);
-  }
+    /* ===== Grid Menu ===== */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
 
-  .section h2 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+    .menu a { 
+      text-decoration: none; 
+    }
 
-  /* ===== Grid Menu ===== */
-  .menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-    gap: 16px;
-  }
+    .box {
+      min-height: 110px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  .menu a { 
-    text-decoration: none; 
-  }
+    .box .icon { 
+      font-size: 1.6rem; 
+      color: #94a3b8;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
 
-  .box {
-    min-height: 100px;
-    border-radius: 10px;
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    padding: 18px 16px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-align: center;
-    position: relative;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+    .box .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
 
-  .box .icon { 
-    font-size: 1.5rem; 
-  }
+    .box:hover {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+      color: #ffffff;
+    }
 
-  .box .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--border-color);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
+    .box:hover .icon {
+      color: #38bdf8;
+      transform: scale(1.1);
+    }
 
-  .box:hover {
-    border-color: #cbd5e1;
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
-  }
+    .box:hover .dot {
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }
 
-  .box:hover .dot {
-    background: var(--brand-accent);
-    transform: scale(1.2);
-  }
+    .box:focus-visible {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
 
-  .box:focus-visible {
-    outline: 2px solid var(--brand-accent);
-    outline-offset: 2px;
-  }
+    /* Status Accents (Themed cards) */
+    .box.green .dot { background: #34d399; }
+    .box.green:hover .icon { color: #34d399; }
+    .box.green:hover { border-color: rgba(52, 211, 153, 0.4); }
 
-  /* Status Accents (Themed cards) */
-  .box.green {
-    background: var(--accent-green-bg);
-    border-color: var(--accent-green-border);
-    color: var(--accent-green-text);
-  }
-  .box.green .dot { background: var(--accent-green-text); }
+    .box.orange .dot { background: #fbbf24; }
+    .box.orange:hover .icon { color: #fbbf24; }
+    .box.orange:hover { border-color: rgba(251, 191, 36, 0.4); }
 
-  .box.orange {
-    background: var(--accent-orange-bg);
-    border-color: var(--accent-orange-border);
-    color: var(--accent-orange-text);
-  }
-  .box.orange .dot { background: var(--accent-orange-text); }
+    .box.red .dot { background: #f87171; }
+    .box.red:hover .icon { color: #f87171; }
+    .box.red:hover { border-color: rgba(248, 113, 113, 0.4); }
 
-  .box.red {
-    background: var(--accent-red-bg);
-    border-color: var(--accent-red-border);
-    color: var(--accent-red-text);
-  }
-  .box.red .dot { background: var(--accent-red-text); }
+    .box.purple .dot { background: #a78bfa; }
+    .box.purple:hover .icon { color: #a78bfa; }
+    .box.purple:hover { border-color: rgba(167, 139, 250, 0.4); }
 
-  .box.purple {
-    background: var(--accent-purple-bg);
-    border-color: var(--accent-purple-border);
-    color: var(--accent-purple-text);
-  }
-  .box.purple .dot { background: var(--accent-purple-text); }
+    /* Logout Box Style */
+    .box.logout {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.25);
+      color: #f87171;
+    }
 
-  /* Logout Box Style */
-  .box.logout {
-    background: #fff;
-    border-color: var(--accent-red-border);
-    color: var(--accent-red-text);
-  }
+    .box.logout .icon {
+      color: #f87171;
+    }
 
-  .box.logout:hover {
-    background: var(--accent-red-bg);
-    border-color: var(--accent-red-text);
-  }
+    .box.logout .dot {
+      background: #f87171;
+    }
 
-  /* ===== Badges ===== */
-  .badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ef4444;
-    color: #ffffff;
-    border-radius: 9999px;
-    padding: 3px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    line-height: 1;
-    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.25);
-  }
+    .box.logout:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+    }
 
-  /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 32px 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
+    .box.logout:hover .icon {
+      color: #ffffff;
+    }
 
-  @media (max-width: 640px) {
-    .header h1 { font-size: 1.5rem; }
-    .profile { flex-direction: column; align-items: flex-start; }
-    .menu { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    /* ===== Badges ===== */
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ef4444;
+      color: #ffffff;
+      border-radius: 9999px;
+      padding: 3px 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.5rem; }
+      .profile { flex-direction: column; align-items: flex-start; }
+      .menu { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-  <div class="eyebrow">Hostel Management System</div>
-  <h1>🏫 Administrator Control Panel</h1>
-  <p>Welcome, {{ college_name }}</p>
-</div>
+  <!-- Ambient Glow Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<div class="container">
-
-  <div class="profile">
-    <h3>👨‍💼 Admin Dashboard</h3>
-    <p>College &nbsp;·&nbsp; <span>{{ college_name }}</span></p>
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">Hostel Management System</div>
+    <h1><i class="fa-solid fa-building-user"></i> Administrator Control Panel</h1>
+    <p>Welcome, {{ college_name }}</p>
   </div>
 
-  <!-- HOSTEL -->
-  <div class="section">
-    <h2>🏢 Hostel Management</h2>
-    <div class="menu">
-      <a href="{{ url_for('room_management') }}">
-        <div class="box"><span class="icon">🏢</span>Room Management<span class="dot"></span></div>
-      </a>
-      <a href="{{ url_for('add_student') }}">
-        <div class="box green"><span class="icon">➕</span>Add Student<span class="dot"></span></div>
-      </a>
-      <a href="{{ url_for('view_students') }}">
-        <div class="box"><span class="icon">👨‍🎓</span>View Students<span class="dot"></span></div>
-      </a>
-      <a href="/admin/room_change_management">
-        <div class="box orange"><span class="icon">🔄</span>Room Change<span class="dot"></span></div>
-      </a>
+  <div class="container">
+
+    <!-- Profile Strip -->
+    <div class="profile">
+      <h3><i class="fa-solid fa-user-shield"></i> Admin Dashboard</h3>
+      <p>College &nbsp;·&nbsp; <span>{{ college_name }}</span></p>
     </div>
-  </div>
 
-  <!-- OUTING -->
-  <div class="section">
-    <h2>🚶 Outing Management</h2>
-    <div class="menu">
-      <a href="/admin/outing_requests">
-        <div class="box orange">
-          {% if pending_outings > 0 %}<span class="badge">{{ pending_outings }}</span>{% endif %}
-          <span class="icon">📋</span>Pending Requests<span class="dot"></span>
-        </div>
-      </a>
-      <a href="/admin/outing_history">
-        <div class="box"><span class="icon">📜</span>Outing History<span class="dot"></span></div>
-      </a>
+    <!-- HOSTEL -->
+    <div class="section">
+      <h2><i class="fa-solid fa-city"></i> Hostel Management</h2>
+      <div class="menu">
+        <a href="{{ url_for('room_management') }}">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-door-open"></i></span>
+            Room Management
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="{{ url_for('add_student') }}">
+          <div class="box green">
+            <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
+            Add Student
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="{{ url_for('view_students') }}">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-users-gear"></i></span>
+            View Students
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/admin/room_change_management">
+          <div class="box orange">
+            <span class="icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+            Room Change
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- MESS -->
-  <div class="section">
-    <h2>🍽 Mess Management</h2>
-    <div class="menu">
-      <a href="{{ url_for('admin_mess_management') }}">
-        <div class="box green"><span class="icon">🍛</span>Manage Mess Menu<span class="dot"></span></div>
-      </a>
-      <a href="/admin/food_feedback">
-        <div class="box"><span class="icon">⭐</span>Food Feedback<span class="dot"></span></div>
-      </a>
+    <!-- OUTING -->
+    <div class="section">
+      <h2><i class="fa-solid fa-person-walking-arrow-right"></i> Outing Management</h2>
+      <div class="menu">
+        <a href="/admin/outing_requests">
+          <div class="box orange">
+            {% if pending_outings > 0 %}<span class="badge">{{ pending_outings }}</span>{% endif %}
+            <span class="icon"><i class="fa-solid fa-clipboard-check"></i></span>
+            Pending Requests
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/admin/outing_history">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-file-invoice"></i></span>
+            Outing History
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- COMPLAINT -->
-  <div class="section">
-    <h2>📝 Complaint Management</h2>
-    <div class="menu">
-      <a href="/admin/complaints">
-        <div class="box red">
-          {% if pending_complaints > 0 %}<span class="badge">{{ pending_complaints }}</span>{% endif %}
-          <span class="icon">📝</span>View Complaints<span class="dot"></span>
-        </div>
-      </a>
+    <!-- MESS -->
+    <div class="section">
+      <h2><i class="fa-solid fa-utensils"></i> Mess Management</h2>
+      <div class="menu">
+        <a href="{{ url_for('admin_mess_management') }}">
+          <div class="box green">
+            <span class="icon"><i class="fa-solid fa-bowl-food"></i></span>
+            Manage Mess Menu
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/admin/food_feedback">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-star-half-stroke"></i></span>
+            Food Feedback
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- SECURITY -->
-  <div class="section">
-    <h2>🛡 Security Management</h2>
-    <div class="menu">
-      <a href="/admin/add_security">
-        <div class="box green"><span class="icon">➕</span>Add Security<span class="dot"></span></div>
-      </a>
-      <a href="/admin/security">
-        <div class="box"><span class="icon">👮</span>View Security<span class="dot"></span></div>
-      </a>
+    <!-- COMPLAINT -->
+    <div class="section">
+      <h2><i class="fa-solid fa-triangle-exclamation"></i> Complaint Management</h2>
+      <div class="menu">
+        <a href="/admin/complaints">
+          <div class="box red">
+            {% if pending_complaints > 0 %}<span class="badge">{{ pending_complaints }}</span>{% endif %}
+            <span class="icon"><i class="fa-solid fa-comment-slash"></i></span>
+            View Complaints
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- NOTICE -->
-  <div class="section">
-    <h2>📢 Notice Management</h2>
-    <div class="menu">
-      <a href="/admin/notices">
-        <div class="box purple"><span class="icon">📢</span>Hostel Notices<span class="dot"></span></div>
-      </a>
+    <!-- SECURITY -->
+    <div class="section">
+      <h2><i class="fa-solid fa-shield-halved"></i> Security Management</h2>
+      <div class="menu">
+        <a href="/admin/add_security">
+          <div class="box green">
+            <span class="icon"><i class="fa-solid fa-user-shield"></i></span>
+            Add Security
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/admin/security">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-passport"></i></span>
+            View Security
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- REPORT -->
-  <div class="section">
-    <h2>📊 Reports</h2>
-    <div class="menu">
-      <a href="/admin/reports">
-        <div class="box"><span class="icon">📊</span>Dashboard Report<span class="dot"></span></div>
-      </a>
-      <a href="/admin/promote_students">
-        <div class="box purple"><span class="icon">🎓</span>Student Promotion<span class="dot"></span></div>
-      </a>
+    <!-- NOTICE -->
+    <div class="section">
+      <h2><i class="fa-solid fa-bullhorn"></i> Notice Management</h2>
+      <div class="menu">
+        <a href="/admin/notices">
+          <div class="box purple">
+            <span class="icon"><i class="fa-solid fa-scroll"></i></span>
+            Hostel Notices
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
 
-  <!-- ACCOUNT -->
-  <div class="section">
-    <h2>⚙ Account</h2>
-    <div class="menu">
-      <a href="/admin/change_password">
-        <div class="box orange"><span class="icon">🔑</span>Change Password<span class="dot"></span></div>
-      </a>
-      <a href="/logout">
-        <div class="box logout"><span class="icon">🚪</span>Logout<span class="dot"></span></div>
-      </a>
+    <!-- REPORT -->
+    <div class="section">
+      <h2><i class="fa-solid fa-chart-column"></i> Reports</h2>
+      <div class="menu">
+        <a href="/admin/reports">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-chart-pie"></i></span>
+            Dashboard Report
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/admin/promote_students">
+          <div class="box purple">
+            <span class="icon"><i class="fa-solid fa-user-gradient"></i></span>
+            Student Promotion
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
     </div>
+
+    <!-- ACCOUNT -->
+    <div class="section">
+      <h2><i class="fa-solid fa-sliders"></i> Account</h2>
+      <div class="menu">
+        <a href="/admin/change_password">
+          <div class="box orange">
+            <span class="icon"><i class="fa-solid fa-key"></i></span>
+            Change Password
+            <span class="dot"></span>
+          </div>
+        </a>
+        <a href="/logout">
+          <div class="box logout">
+            <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+            Logout
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
   </div>
 
-</div>
-
-<div class="footer">© 2026 HOSTEL MANAGEMENT SYSTEM · ADMIN PANEL</div>
+  <div class="footer">
+    © 2026 HOSTEL MANAGEMENT SYSTEM • ADMIN PANEL
+  </div>
 
 </body>
 </html>

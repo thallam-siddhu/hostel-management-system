@@ -2,387 +2,484 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>Security Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Dashboard | Hostel Management System</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<style>
-  :root {
-    --bg-main: #f8fafc;
-    --card-bg: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    
-    --brand-primary: #0f172a;
-    --brand-accent: #2563eb;
-    
-    --border-color: #e2e8f0;
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-    /* Accents */
-    --accent-green: #10b981;
-    --accent-orange: #f59e0b;
-    --accent-red: #ef4444;
-    --accent-blue: #3b82f6;
-  }
+    body {
+      min-height: 100vh;
+      background: #0f172a; /* Deep dark slate base */
+      color: #f8fafc;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-  * { 
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
-  }
+    /* Ambient Glow Background Orbs (Cyan & Dark Blue Theme for Security) */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.45;
+      z-index: 1;
+      animation: float 14s ease-in-out infinite alternate;
+    }
 
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-primary);
-    background-color: var(--bg-main);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+    .orb-1 {
+      width: 550px;
+      height: 550px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      top: -150px;
+      left: -150px;
+    }
 
-  /* ===== Header ===== */
-  .header {
-    background: var(--brand-primary);
-    color: #ffffff;
-    padding: 44px 24px 60px;
-    text-align: center;
-    position: relative;
-  }
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #0d9488, #0284c7);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -7s;
+    }
 
-  .header h1 {
-    font-size: 1.875rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    margin-bottom: 4px;
-  }
+    @keyframes float {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(35px, 35px) scale(1.05); }
+    }
 
-  .header h2 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #cbd5e1;
-  }
+    /* ===== Header ===== */
+    .header {
+      position: relative;
+      z-index: 10;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 24px 60px;
+      text-align: center;
+    }
 
-  .header p {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #94a3b8;
-    margin-top: 8px;
-  }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
 
-  /* ===== Container ===== */
-  .container {
-    max-width: 1140px;
-    margin: -32px auto 48px;
-    padding: 0 20px;
-    position: relative;
-    z-index: 10;
-  }
+    .header h1 i {
+      color: #38bdf8;
+    }
 
-  /* ===== Profile Strip ===== */
-  .profile {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 18px 24px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 20px;
-  }
+    .header h2 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #cbd5e1;
+    }
 
-  .profile h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
+    .header h2 span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
 
-  .profile p {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
+    .header p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-top: 10px;
+    }
 
-  .profile span {
-    color: var(--brand-accent);
-    font-weight: 600;
-  }
+    /* ===== Container ===== */
+    .container {
+      max-width: 1140px;
+      margin: -28px auto 48px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
 
-  /* ===== Cards ===== */
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-  }
+    /* ===== Profile Strip ===== */
+    .profile {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 28px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      margin-bottom: 24px;
+    }
 
-  .card h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    .profile h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
 
-  /* ===== Menu Grid ===== */
-  .menu {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
+    .profile h2 i {
+      color: #38bdf8;
+    }
 
-  .menu a { 
-    text-decoration: none; 
-  }
+    .profile p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
 
-  .box {
-    min-height: 100px;
-    border-radius: 8px;
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 6px;
-    padding: 16px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-align: center;
-    position: relative;
-    transition: all 0.2s ease;
-  }
+    .profile span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
 
-  .box:hover {
-    border-color: #cbd5e1;
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
+    /* ===== Cards ===== */
+    .card {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.25s ease;
+    }
 
-  /* Dot indicators */
-  .box::after {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent, var(--border-color));
-    transition: background-color 0.2s ease;
-  }
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
 
-  .box:hover::after {
-    background: var(--brand-accent);
-  }
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .box.green { --accent: var(--accent-green); }
-  .box.orange { --accent: var(--accent-orange); }
+    .card h2 i {
+      color: #38bdf8;
+    }
 
-  /* ===== Report Stats ===== */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-  }
+    /* ===== Menu Grid ===== */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
 
-  .stat {
-    background: #f8fafc;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.2s ease;
-  }
+    .menu a { 
+      text-decoration: none; 
+    }
 
-  .stat:hover {
-    transform: translateY(-2px);
-  }
+    .box {
+      min-height: 110px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  .stat h1 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brand-primary);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
+    .box .icon {
+      font-size: 1.6rem;
+      color: #94a3b8;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
 
-  .stat p {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+    .box .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.25s ease;
+    }
 
-  /* ===== Instructions ===== */
-  .instructions ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+    .box:hover {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
+      color: #ffffff;
+    }
 
-  .instructions li {
-    background: #f8fafc;
-    border: 1px solid var(--border-color);
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-  }
+    .box:hover .icon {
+      color: #38bdf8;
+      transform: scale(1.1);
+    }
 
-  /* ===== Logout Button ===== */
-  .logout { 
-    text-align: center; 
-    margin-top: 24px; 
-  }
+    .box:hover .dot {
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }
 
-  .logout button {
-    background: #ffffff;
-    color: #dc2626;
-    border: 1px solid #fca5a5;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
+    .box.green .dot { background: #34d399; }
+    .box.green:hover .icon { color: #34d399; }
+    .box.green:hover { border-color: rgba(52, 211, 153, 0.4); }
 
-  .logout button:hover {
-    background: #fef2f2;
-    border-color: #dc2626;
-  }
+    .box.orange .dot { background: #fbbf24; }
+    .box.orange:hover .icon { color: #fbbf24; }
+    .box.orange:hover { border-color: rgba(251, 191, 36, 0.4); }
 
-  /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
+    /* ===== Report Stats ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
 
-  @media (max-width: 640px) {
-    .header h1 { font-size: 1.5rem; }
-    .profile { flex-direction: column; align-items: flex-start; }
-    .menu { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    .stat {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #38bdf8;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat p {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+
+    /* ===== Instructions ===== */
+    .instructions ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .instructions li {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .instructions li i {
+      color: #34d399;
+      font-size: 1rem;
+    }
+
+    /* ===== Logout Button ===== */
+    .logout {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .logout a {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .logout button {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+
+    .logout button:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.5rem; }
+      .profile { flex-direction: column; align-items: flex-start; }
+      .menu { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>🛡 Hostel Security Dashboard</h1>
-  <h2>Welcome {{ security_username }}</h2>
-  <p>Gate Control & Student Verification Panel</p>
-</div>
+  <!-- Ambient Glow Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-<div class="container">
-
-  <!-- PROFILE -->
-  <div class="profile">
-    <div>
-      <h2>👮 Security Profile</h2>
-      <p>Username : <span>{{ security_username }}</span></p>
-    </div>
-    <div>
-      <p>Role : <span>Security Guard</span></p>
-    </div>
+  <!-- Header -->
+  <div class="header">
+    <h1><i class="fa-solid fa-shield-halved"></i> Hostel Security Dashboard</h1>
+    <h2>Welcome <span>{{ security_username }}</span></h2>
+    <p>Gate Control & Student Verification Panel</p>
   </div>
 
-  <!-- MANAGEMENT -->
-  <div class="card">
-    <h2>🚪 Gate Management</h2>
-    <div class="menu">
-      <a href="/security/verify_permission">
-        <div class="box green">
-          🔍
-          <span>Verify Permission ID</span>
-        </div>
-      </a>
+  <div class="container">
 
-      <a href="/security/history">
-        <div class="box">
-          📋
-          <span>Outing History</span>
-        </div>
-      </a>
-
-      <a href="/security/change_password">
-        <div class="box orange">
-          🔑
-          <span>Change Password</span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- REPORT -->
-  <div class="card">
-    <h2>📊 Security Report</h2>
-    <div class="stats">
-      <div class="stat">
-        <h1>{{ total_out }}</h1>
-        <p>Students Currently Outside</p>
+    <!-- PROFILE -->
+    <div class="profile">
+      <div>
+        <h2><i class="fa-solid fa-user-shield"></i> Security Profile</h2>
+        <p>Username : <span>{{ security_username }}</span></p>
       </div>
-
-      <div class="stat">
-        <h1>{{ returned_today }}</h1>
-        <p>Students Returned Today</p>
-      </div>
-
-      <div class="stat">
-        <h1>{{ total_records }}</h1>
-        <p>Total Outing Records</p>
+      <div>
+        <p>Role : <span>Security Guard</span></p>
       </div>
     </div>
+
+    <!-- MANAGEMENT -->
+    <div class="card">
+      <h2><i class="fa-solid fa-door-open"></i> Gate Management</h2>
+      <div class="menu">
+        <a href="/security/verify_permission">
+          <div class="box green">
+            <span class="icon"><i class="fa-solid fa-qrcode"></i></span>
+            Verify Permission ID
+            <span class="dot"></span>
+          </div>
+        </a>
+
+        <a href="/security/history">
+          <div class="box">
+            <span class="icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+            Outing History
+            <span class="dot"></span>
+          </div>
+        </a>
+
+        <a href="/security/change_password">
+          <div class="box orange">
+            <span class="icon"><i class="fa-solid fa-key"></i></span>
+            Change Password
+            <span class="dot"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- REPORT -->
+    <div class="card">
+      <h2><i class="fa-solid fa-chart-simple"></i> Security Report</h2>
+      <div class="stats">
+        <div class="stat">
+          <h1>{{ total_out }}</h1>
+          <p>Students Currently Outside</p>
+        </div>
+
+        <div class="stat">
+          <h1>{{ returned_today }}</h1>
+          <p>Students Returned Today</p>
+        </div>
+
+        <div class="stat">
+          <h1>{{ total_records }}</h1>
+          <p>Total Outing Records</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="card instructions">
+      <h2><i class="fa-solid fa-list-check"></i> Security Instructions</h2>
+      <ul>
+        <li><i class="fa-solid fa-circle-check"></i> Verify Permission ID before allowing student exit.</li>
+        <li><i class="fa-solid fa-circle-check"></i> Check student details properly.</li>
+        <li><i class="fa-solid fa-circle-check"></i> Record entry and exit timings.</li>
+        <li><i class="fa-solid fa-circle-check"></i> Do not allow invalid permissions.</li>
+        <li><i class="fa-solid fa-circle-check"></i> Maintain hostel gate discipline.</li>
+      </ul>
+    </div>
+
+    <!-- LOGOUT -->
+    <div class="logout">
+      <a href="/logout">
+        <button type="button">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout Account
+        </button>
+      </a>
+    </div>
+
   </div>
 
-  <!-- INSTRUCTIONS -->
-  <div class="card instructions">
-    <h2>📌 Security Instructions</h2>
-    <ul>
-      <li>✅ Verify Permission ID before allowing student exit.</li>
-      <li>✅ Check student details properly.</li>
-      <li>✅ Record entry and exit timings.</li>
-      <li>✅ Do not allow invalid permissions.</li>
-      <li>✅ Maintain hostel gate discipline.</li>
-    </ul>
+  <div class="footer">
+    © 2026 HOSTEL MANAGEMENT SYSTEM • SECURITY PANEL
   </div>
-
-  <!-- LOGOUT -->
-  <div class="logout">
-    <a href="/logout">
-      <button>🚪 Logout</button>
-    </a>
-  </div>
-
-</div>
-
-<div class="footer">
-  © 2026 Hostel Management System | Security Panel
-</div>
 
 </body>
 </html>
