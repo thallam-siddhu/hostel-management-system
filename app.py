@@ -1517,29 +1517,28 @@ def security_dashboard():
     conn = sqlite3.connect("hostel.db")
     cursor = conn.cursor()
 
-    # Total students currently OUT
+    # 1. Students Currently Outside (Approved Outings)
     cursor.execute("""
-    SELECT COUNT(*)
-    FROM outing_requests
-    WHERE status='Approved'
+        SELECT COUNT(*)
+        FROM outing_requests
+        WHERE status='Approved'
     """)
     total_out = cursor.fetchone()[0]
 
-    # Pending outing requests
+    # 2. Students Returned Today
     cursor.execute("""
-    SELECT COUNT(*)
-    FROM outing_requests
-    WHERE status='Pending'
+        SELECT COUNT(*)
+        FROM outing_requests
+        WHERE return_date = DATE('now')
     """)
-    pending_requests = cursor.fetchone()[0]
+    returned_today = cursor.fetchone()[0]
 
-    # Rejected outing requests
+    # 3. Total Outing Records
     cursor.execute("""
-    SELECT COUNT(*)
-    FROM outing_requests
-    WHERE status='Rejected'
+        SELECT COUNT(*)
+        FROM outing_requests
     """)
-    rejected_requests = cursor.fetchone()[0]
+    total_records = cursor.fetchone()[0]
 
     conn.close()
 
@@ -1547,11 +1546,9 @@ def security_dashboard():
         "security_dashboard.html",
         security_username=session["security_username"],
         total_out=total_out,
-        pending_requests=pending_requests,
-        rejected_requests=rejected_requests
+        returned_today=returned_today,
+        total_records=total_records
     )
-
-
 @app.route("/admin/add_security", methods=["GET", "POST"])
 def add_security():
 
