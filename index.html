@@ -6,7 +6,7 @@
 
     <title>Hostel Management System | Thallam Siddhu</title>
 
-    <meta name="description" content="Hostel Management System developed by Thallam Siddhu, a Computer Science Engineering student and software developer.">
+    <meta name="description" content="Hostel Management System developed by Thallam Siddhu. A modern digital platform for managing students, rooms, outings and hostel administration.">
     <meta name="author" content="Thallam Siddhu">
     <meta name="keywords" content="Thallam Siddhu, Hostel Management System, Hostel Management, Flask Project, Python Project, CSE Project">
 
@@ -22,8 +22,8 @@
         }
 
         body {
-            font-family: Inter, Arial, sans-serif;
-            background: #070b14;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #05070d;
             color: #f5f7ff;
             line-height: 1.6;
         }
@@ -34,38 +34,61 @@
         }
 
         .container {
-            width: min(1100px, 90%);
+            width: min(1120px, 90%);
             margin: auto;
         }
 
         header {
-            padding: 25px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 7, 13, 0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
         }
 
         nav {
+            height: 72px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .logo {
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
         .logo span {
-            color: #7c8cff;
+            color: #8b98ff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
         }
 
         .nav-link {
-            color: #aeb6ca;
+            color: #9ba4b8;
             font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 9px 16px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero {
-            min-height: 75vh;
+            min-height: 82vh;
             display: flex;
             align-items: center;
             text-align: center;
@@ -76,54 +99,57 @@
         .hero::before {
             content: "";
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             background: #5967ff;
+            opacity: 0.14;
             filter: blur(180px);
-            opacity: 0.15;
-            top: -180px;
+            border-radius: 50%;
+            top: -250px;
             left: 50%;
             transform: translateX(-50%);
         }
 
         .hero-content {
             position: relative;
-            width: 100%;
+            z-index: 1;
         }
 
         .badge {
             display: inline-block;
-            padding: 7px 14px;
-            border: 1px solid rgba(124,140,255,0.3);
-            background: rgba(124,140,255,0.08);
-            color: #9ca8ff;
+            padding: 7px 15px;
             border-radius: 50px;
-            font-size: 12px;
-            margin-bottom: 24px;
+            border: 1px solid rgba(139,152,255,0.25);
+            background: rgba(139,152,255,0.08);
+            color: #a9b2ff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.3px;
+            margin-bottom: 25px;
         }
 
         h1 {
-            font-size: clamp(42px, 7vw, 78px);
-            line-height: 1.05;
-            letter-spacing: -3px;
-            margin-bottom: 22px;
+            font-size: clamp(45px, 7vw, 82px);
+            line-height: 1.02;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
         }
 
         h1 span {
-            background: linear-gradient(90deg, #ffffff, #8794ff);
+            background: linear-gradient(90deg, #ffffff, #8996ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            max-width: 680px;
+        .hero-description {
+            max-width: 700px;
             margin: auto;
-            color: #9ca5ba;
+            color: #929bad;
             font-size: 17px;
         }
 
         .buttons {
-            margin-top: 35px;
+            margin-top: 38px;
             display: flex;
             justify-content: center;
             gap: 14px;
@@ -131,7 +157,10 @@
         }
 
         .btn {
-            padding: 13px 23px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
             border-radius: 10px;
             font-size: 14px;
             font-weight: 600;
@@ -140,104 +169,133 @@
 
         .btn-primary {
             background: #ffffff;
-            color: #080b13;
+            color: #06080e;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.12);
         }
 
         .btn-secondary {
-            border: 1px solid rgba(255,255,255,0.14);
-            color: #dce1ee;
-            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.035);
+            color: #d9deea;
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-2px);
         }
 
         section {
-            padding: 90px 0;
+            padding: 100px 0;
         }
 
-        .section-title {
+        .section-heading {
             text-align: center;
-            margin-bottom: 45px;
+            margin-bottom: 50px;
         }
 
-        .section-title h2 {
-            font-size: 34px;
-            letter-spacing: -1px;
+        .section-heading h2 {
+            font-size: 36px;
+            letter-spacing: -1.5px;
             margin-bottom: 10px;
         }
 
-        .section-title p {
-            color: #8e97aa;
+        .section-heading p {
+            color: #7f889b;
             font-size: 14px;
         }
 
         .about {
-            max-width: 760px;
+            max-width: 780px;
             margin: auto;
             text-align: center;
-            color: #aeb6c8;
+            color: #a2aabd;
             font-size: 16px;
         }
 
-        .grid {
+        .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
-        .card {
-            padding: 28px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.025);
+        .feature {
+            padding: 30px;
             border-radius: 16px;
-            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.075);
+            background: rgba(255,255,255,0.025);
+            transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(124,140,255,0.35);
-            background: rgba(255,255,255,0.04);
+        .feature:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139,152,255,0.3);
+            background: rgba(255,255,255,0.045);
         }
 
-        .card h3 {
+        .feature-number {
+            color: #8996ff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .feature h3 {
             font-size: 17px;
             margin-bottom: 8px;
         }
 
-        .card p {
-            color: #8e97aa;
+        .feature p {
+            color: #828b9f;
             font-size: 14px;
         }
 
-        .tech {
+        .technology {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .tech span {
+        .technology span {
             padding: 9px 15px;
-            border: 1px solid rgba(255,255,255,0.09);
             border-radius: 8px;
-            color: #b8c0d2;
-            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.08);
             background: rgba(255,255,255,0.025);
+            color: #aeb6c8;
+            font-size: 13px;
+        }
+
+        .launch {
+            text-align: center;
+            padding: 65px 25px;
+            border-radius: 22px;
+            border: 1px solid rgba(139,152,255,0.16);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139,152,255,0.08),
+                    rgba(255,255,255,0.025)
+                );
+        }
+
+        .launch h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .launch p {
+            color: #8c95a8;
+            font-size: 14px;
+            margin-bottom: 25px;
         }
 
         .developer {
             text-align: center;
-            padding: 55px 20px;
-            border: 1px solid rgba(124,140,255,0.15);
-            background: linear-gradient(135deg, rgba(124,140,255,0.07), rgba(255,255,255,0.02));
-            border-radius: 20px;
         }
 
         .developer h2 {
@@ -246,14 +304,14 @@
         }
 
         .developer p {
-            color: #929bad;
+            color: #858ea1;
             font-size: 14px;
         }
 
         .developer a {
             display: inline-block;
-            margin-top: 20px;
-            color: #9da8ff;
+            margin-top: 18px;
+            color: #9ca7ff;
             font-size: 14px;
         }
 
@@ -261,21 +319,25 @@
             padding: 30px 0;
             border-top: 1px solid rgba(255,255,255,0.07);
             text-align: center;
-            color: #697286;
+            color: #626b7d;
             font-size: 12px;
         }
 
-        @media (max-width: 750px) {
-            .grid {
+        @media (max-width: 800px) {
+            .features {
                 grid-template-columns: 1fr;
             }
 
+            .nav-link {
+                display: none;
+            }
+
             h1 {
-                letter-spacing: -2px;
+                letter-spacing: -2.5px;
             }
 
             section {
-                padding: 65px 0;
+                padding: 70px 0;
             }
         }
     </style>
@@ -286,101 +348,147 @@
 <header>
     <div class="container">
         <nav>
-            <div class="logo">Thallam <span>Siddhu</span></div>
-            <a class="nav-link" href="https://github.com/thallam-siddhu" target="_blank">GitHub</a>
+
+            <div class="logo">
+                Thallam <span>Siddhu</span>
+            </div>
+
+            <div class="nav-right">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#technology" class="nav-link">Technology</a>
+
+                <a href="https://hostel-management-system-n82f.onrender.com"
+                   target="_blank"
+                   class="nav-link nav-button">
+                    Launch App
+                </a>
+            </div>
+
         </nav>
     </div>
 </header>
+
 
 <main>
 
     <section class="hero">
         <div class="container hero-content">
 
-            <div class="badge">COMPUTER SCIENCE ENGINEERING PROJECT</div>
+            <div class="badge">
+                COMPUTER SCIENCE ENGINEERING PROJECT
+            </div>
 
             <h1>
                 <span>Hostel Management</span><br>
                 System
             </h1>
 
-            <p>
-                A modern digital platform designed to simplify hostel
-                administration, student management, rooms, outings and daily operations.
+            <p class="hero-description">
+                A modern digital platform for managing students, rooms,
+                outings and hostel administration through one centralized system.
             </p>
 
             <div class="buttons">
-                <a class="btn btn-primary"
-                   href="https://hostel-management-system-b3jt.onrender.com"
-                   target="_blank">
-                    Open Application
+
+                <a href="https://hostel-management-system-n82f.onrender.com"
+                   target="_blank"
+                   class="btn btn-primary">
+                    Launch Application
                 </a>
 
-                <a class="btn btn-secondary"
-                   href="https://github.com/thallam-siddhu/hostel-management-system"
-                   target="_blank">
+                <a href="https://github.com/thallam-siddhu/hostel-management-system"
+                   target="_blank"
+                   class="btn btn-secondary">
                     View Source Code
                 </a>
+
             </div>
 
         </div>
     </section>
 
+
     <section>
         <div class="container">
 
-            <div class="section-title">
-                <h2>Built for Smarter Hostel Management</h2>
-                <p>Designed to bring essential hostel operations into one platform.</p>
+            <div class="section-heading">
+                <h2>One Platform. Complete Management.</h2>
+                <p>Designed to simplify everyday hostel operations.</p>
             </div>
 
-            <div class="about">
-                This project provides a centralized system for managing students,
-                rooms, hostel activities and administration. It is built as a
-                practical Computer Science Engineering project using Python and Flask.
-            </div>
+            <p class="about">
+                Hostel Management System is a web-based application developed
+                to bring essential hostel operations into one centralized
+                platform. It provides tools for student management, room
+                allocation, outing requests and administration.
+            </p>
 
         </div>
     </section>
 
-    <section>
+
+    <section id="features">
         <div class="container">
 
-            <div class="section-title">
-                <h2>Key Features</h2>
-                <p>Core functionality of the application</p>
+            <div class="section-heading">
+                <h2>Core Features</h2>
+                <p>Everything organized in one place.</p>
             </div>
 
-            <div class="grid">
+            <div class="features">
 
-                <div class="card">
+                <div class="feature">
+                    <div class="feature-number">01</div>
                     <h3>Student Management</h3>
-                    <p>Manage student information and hostel-related records.</p>
+                    <p>
+                        Manage student information and hostel-related records
+                        through a centralized system.
+                    </p>
                 </div>
 
-                <div class="card">
+                <div class="feature">
+                    <div class="feature-number">02</div>
                     <h3>Room Management</h3>
-                    <p>Organize hostel blocks, rooms, occupancy and allocation.</p>
+                    <p>
+                        Organize blocks, rooms, occupancy and student
+                        room allocation efficiently.
+                    </p>
                 </div>
 
-                <div class="card">
-                    <h3>Outing Management</h3>
-                    <p>Students can submit outing requests and manage their requests.</p>
+                <div class="feature">
+                    <div class="feature-number">03</div>
+                    <h3>Outing Requests</h3>
+                    <p>
+                        Students can submit outing requests while
+                        administrators manage approvals.
+                    </p>
                 </div>
 
-                <div class="card">
+                <div class="feature">
+                    <div class="feature-number">04</div>
                     <h3>Administration</h3>
-                    <p>Administrative features for managing hostel operations.</p>
+                    <p>
+                        Centralized tools help administrators manage
+                        important hostel activities.
+                    </p>
                 </div>
 
-                <div class="card">
+                <div class="feature">
+                    <div class="feature-number">05</div>
                     <h3>Authentication</h3>
-                    <p>Secure login and account-based access to the system.</p>
+                    <p>
+                        Account-based access keeps student and administrative
+                        areas separated.
+                    </p>
                 </div>
 
-                <div class="card">
-                    <h3>Digital Management</h3>
-                    <p>Reduce manual hostel work through a centralized web application.</p>
+                <div class="feature">
+                    <div class="feature-number">06</div>
+                    <h3>Digital Workflow</h3>
+                    <p>
+                        Replace repetitive manual processes with a
+                        structured digital workflow.
+                    </p>
                 </div>
 
             </div>
@@ -388,15 +496,16 @@
         </div>
     </section>
 
-    <section>
+
+    <section id="technology">
         <div class="container">
 
-            <div class="section-title">
-                <h2>Technology</h2>
-                <p>Built with modern web development technologies</p>
+            <div class="section-heading">
+                <h2>Technology Stack</h2>
+                <p>Built using practical web development technologies.</p>
             </div>
 
-            <div class="tech">
+            <div class="technology">
                 <span>Python</span>
                 <span>Flask</span>
                 <span>HTML</span>
@@ -410,22 +519,54 @@
         </div>
     </section>
 
+
+    <section>
+        <div class="container">
+
+            <div class="launch">
+
+                <h2>Ready to Explore?</h2>
+
+                <p>
+                    Open the live Hostel Management System and explore
+                    the application.
+                </p>
+
+                <a href="https://hostel-management-system-n82f.onrender.com"
+                   target="_blank"
+                   class="btn btn-primary">
+                    Open Live Application
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
     <section>
         <div class="container">
 
             <div class="developer">
-                <h2>Developed by Thallam Siddhu</h2>
-                <p>Computer Science Engineering Student & Software Developer</p>
 
-                <a href="https://github.com/thallam-siddhu" target="_blank">
+                <h2>Developed by Thallam Siddhu</h2>
+
+                <p>
+                    Computer Science Engineering Student & Software Developer
+                </p>
+
+                <a href="https://github.com/thallam-siddhu"
+                   target="_blank">
                     github.com/thallam-siddhu
                 </a>
+
             </div>
 
         </div>
     </section>
 
 </main>
+
 
 <footer>
     © 2026 Thallam Siddhu · Hostel Management System
