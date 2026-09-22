@@ -1,563 +1,1925 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <title>Thallam Siddhu | Portfolio</title>
+<title>Thallam Siddhu — Hostel Management System</title>
 
-    <meta name="description" content="Thallam Siddhu - Computer Science Engineering student, software developer and technology enthusiast.">
-    <meta name="author" content="Thallam Siddhu">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
 
-        html {
-            scroll-behavior: smooth;
-        }
+:root{
+  --bg:#050b16;
+  --bg2:#081426;
+  --card:#0b1729;
+  --card2:#0e1d33;
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0b0f19;
-            color: #ffffff;
-            line-height: 1.6;
-        }
+  --blue:#3b82f6;
+  --blue-light:#60a5fa;
+  --cyan:#38bdf8;
+  --green:#22c55e;
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  --white:#f8fbff;
+  --text:#dce8f7;
+  --muted:#8ea2bb;
 
-        /* NAVBAR */
+  --border:rgba(148,163,184,.14);
+  --border-blue:rgba(59,130,246,.35);
 
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(11, 15, 25, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
+  --shadow:0 25px 70px rgba(0,0,0,.45);
+}
 
-        .nav-container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+*{
+  box-sizing:border-box;
+}
 
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
+html,body{
+  margin:0;
+  padding:0;
+}
 
-        .logo span {
-            color: #6ea8ff;
-        }
+body{
+  background:
+    radial-gradient(circle at 10% 10%,rgba(37,99,235,.12),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(14,165,233,.09),transparent 28%),
+    var(--bg);
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-        }
+  color:var(--white);
 
-        .nav-links a {
-            color: #c8ceda;
-            font-size: 15px;
-            transition: 0.3s;
-        }
+  font-family:'Manrope',sans-serif;
 
-        .nav-links a:hover {
-            color: #6ea8ff;
-        }
+  -webkit-font-smoothing:antialiased;
 
-        /* HERO */
+  overflow-x:hidden;
+}
 
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 60px 20px;
-            background:
-                radial-gradient(circle at top, rgba(70,120,255,0.16), transparent 40%),
-                #0b0f19;
-        }
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:linear-gradient(to bottom,black,transparent);
+}
 
-        .hero-content {
-            max-width: 850px;
-        }
+h1,h2,h3,.serif{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  letter-spacing:-.02em;
+}
 
-        .hero h1 {
-            font-size: clamp(45px, 8vw, 82px);
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:0 24px;
+}
 
-        .hero h1 span {
-            color: #6ea8ff;
-        }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-        .hero p {
-            max-width: 650px;
-            margin: auto;
-            color: #aeb6c5;
-            font-size: 18px;
-        }
 
-        .hero-buttons {
-            margin-top: 35px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+/* =========================
+   NAVBAR
+========================= */
 
-        .btn {
-            padding: 13px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-        }
+nav{
+  position:sticky;
+  top:0;
+  z-index:100;
 
-        .btn-primary {
-            background: #ffffff;
-            color: #0b0f19;
-        }
+  background:rgba(5,11,22,.78);
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-        }
+  backdrop-filter:blur(18px);
 
-        .btn-secondary {
-            border: 1px solid #30394d;
-            color: #ffffff;
-        }
+  border-bottom:1px solid var(--border);
+}
 
-        .btn-secondary:hover {
-            background: #151c2b;
-        }
+.nav-inner{
+  height:78px;
 
-        /* SECTIONS */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-        section {
-            max-width: 1100px;
-            margin: auto;
-            padding: 90px 25px;
-        }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-        .section-title {
-            font-size: 34px;
-            margin-bottom: 15px;
-        }
+.brand-mark{
+  width:44px;
+  height:44px;
 
-        .section-subtitle {
-            color: #8f98a8;
-            margin-bottom: 35px;
-        }
+  border-radius:12px;
 
-        /* ABOUT */
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-        .about-card {
-            background: #111725;
-            border: 1px solid #202a3d;
-            border-radius: 18px;
-            padding: 30px;
-            color: #c0c7d3;
-        }
+  font-family:'Fraunces',serif;
+  font-weight:700;
 
-        /* SKILLS */
+  color:white;
 
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
+  background:
+    linear-gradient(135deg,var(--blue),var(--cyan));
 
-        .skill {
-            background: #111725;
-            border: 1px solid #202a3d;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: center;
-            color: #d8deea;
-            transition: 0.3s;
-        }
+  box-shadow:
+    0 8px 30px rgba(59,130,246,.35);
+}
 
-        .skill:hover {
-            transform: translateY(-5px);
-            border-color: #466da8;
-        }
+.brand-name{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:17px;
+}
 
-        /* PROJECTS */
+.brand-sub{
+  font-size:11px;
+  color:var(--blue-light);
+  margin-top:2px;
+}
 
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+.nav-links{
+  display:none;
+  align-items:center;
+  gap:32px;
+}
 
-        .project-card {
-            background: #111725;
-            border: 1px solid #202a3d;
-            border-radius: 18px;
-            padding: 28px;
-            transition: 0.3s;
-        }
+.nav-links a{
+  color:var(--muted);
+  font-size:14px;
 
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: #466da8;
-        }
+  transition:.25s;
+}
 
-        .project-card h3 {
-            margin-bottom: 12px;
-            font-size: 21px;
-        }
+.nav-links a:hover{
+  color:white;
+}
 
-        .project-card p {
-            color: #9fa8b8;
-            margin-bottom: 22px;
-        }
+@media(min-width:860px){
+  .nav-links{
+    display:flex;
+  }
+}
 
-        .project-link {
-            display: inline-block;
-            padding: 10px 16px;
-            background: #ffffff;
-            color: #0b0f19;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
 
-        .project-link:hover {
-            opacity: 0.85;
-        }
+/* =========================
+   BUTTONS
+========================= */
 
-        /* CONTACT */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-        .contact-card {
-            text-align: center;
-            background: #111725;
-            border: 1px solid #202a3d;
-            border-radius: 18px;
-            padding: 45px 25px;
-        }
+  gap:8px;
 
-        .contact-card p {
-            color: #9fa8b8;
-            margin: 12px auto 25px;
-            max-width: 600px;
-        }
+  font-size:14px;
+  font-weight:700;
 
-        /* FOOTER */
+  padding:13px 22px;
 
-        footer {
-            border-top: 1px solid #202635;
-            text-align: center;
-            padding: 25px;
-            color: #747d8d;
-            font-size: 14px;
-        }
+  border-radius:10px;
 
-        /* MOBILE */
+  transition:
+    transform .25s,
+    box-shadow .25s,
+    background .25s;
 
-        @media (max-width: 700px) {
+  cursor:pointer;
+}
 
-            .nav-container {
-                padding: 16px 18px;
-            }
+.btn-amber{
+  color:white;
 
-            .nav-links {
-                gap: 14px;
-            }
+  background:
+    linear-gradient(135deg,var(--blue),#2563eb);
 
-            .nav-links a {
-                font-size: 13px;
-            }
+  box-shadow:
+    0 10px 30px rgba(37,99,235,.25);
+}
 
-            .hero {
-                min-height: 80vh;
-            }
+.btn-amber:hover{
+  transform:translateY(-2px);
 
-            section {
-                padding: 70px 18px;
-            }
+  box-shadow:
+    0 15px 40px rgba(37,99,235,.4);
+}
 
-            .section-title {
-                font-size: 29px;
-            }
+.btn-ghost{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.025);
 
-            .hero p {
-                font-size: 16px;
-            }
-        }
-    </style>
+  color:white;
+
+  backdrop-filter:blur(10px);
+}
+
+.btn-ghost:hover{
+  border-color:var(--border-blue);
+
+  background:rgba(59,130,246,.08);
+
+  transform:translateY(-2px);
+}
+
+.btn-sm{
+  padding:9px 16px;
+  font-size:13px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+
+  padding:105px 0 100px;
+
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:550px;
+  height:550px;
+
+  top:-250px;
+  left:-180px;
+
+  background:rgba(37,99,235,.12);
+
+  filter:blur(90px);
+
+  border-radius:50%;
+}
+
+.hero-grid{
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:70px;
+
+  align-items:center;
+}
+
+@media(min-width:960px){
+
+  .hero-grid{
+    grid-template-columns:1.05fr .95fr;
+  }
+
+}
+
+.eyebrow{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:7px 13px;
+
+  border-radius:50px;
+
+  background:rgba(59,130,246,.08);
+
+  border:1px solid rgba(59,130,246,.18);
+
+  color:var(--blue-light);
+
+  font-size:12px;
+
+  margin-bottom:24px;
+}
+
+.eyebrow span.dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:0 0 12px var(--green);
+}
+
+.hero h1{
+  max-width:750px;
+
+  font-size:clamp(3rem,6vw,5rem);
+
+  line-height:1.01;
+
+  margin:0 0 28px;
+
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 20%,
+      #bfdbfe 55%,
+      #60a5fa
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p.lead{
+  max-width:650px;
+
+  font-size:17px;
+
+  line-height:1.75;
+
+  color:var(--muted);
+
+  margin:0 0 36px;
+}
+
+.hero-actions{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:14px;
+
+  margin-bottom:48px;
+}
+
+.hero-stats{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:45px;
+}
+
+.stat b{
+  display:block;
+
+  font-family:'Fraunces',serif;
+
+  font-size:30px;
+
+  color:white;
+}
+
+.stat span{
+  display:block;
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+
+/* =========================
+   PREMIUM KEYCARD
+========================= */
+
+.keycard-wrap{
+  position:relative;
+
+  height:440px;
+
+  perspective:1000px;
+}
+
+.keycard{
+  position:absolute;
+
+  width:290px;
+
+  border-radius:22px;
+
+  padding:26px;
+
+  border:1px solid rgba(148,163,184,.2);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20,48,82,.95),
+      rgba(7,17,31,.98)
+    );
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.08);
+
+  backdrop-filter:blur(12px);
+}
+
+.keycard::after{
+  content:"";
+
+  position:absolute;
+
+  width:100px;
+  height:100px;
+
+  top:-30px;
+  right:-30px;
+
+  background:rgba(59,130,246,.15);
+
+  filter:blur(35px);
+
+  border-radius:50%;
+}
+
+.keycard.k1{
+  top:20px;
+  left:20px;
+
+  transform:rotate(-7deg);
+
+  z-index:2;
+}
+
+.keycard.k2{
+  top:120px;
+  left:150px;
+
+  transform:rotate(6deg);
+
+  z-index:1;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14,52,76,.95),
+      rgba(7,17,31,.98)
+    );
+}
+
+.keycard-top{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  margin-bottom:38px;
+}
+
+.keycard-hole{
+  width:36px;
+  height:11px;
+
+  border-radius:8px;
+
+  background:#030712;
+
+  border:1px solid var(--border);
+}
+
+.keycard-tag{
+  font-size:10px;
+
+  color:var(--blue-light);
+
+  letter-spacing:.08em;
+
+  font-weight:700;
+}
+
+.keycard-room{
+  font-family:'Fraunces',serif;
+
+  font-size:38px;
+
+  color:white;
+
+  margin-top:5px;
+}
+
+.keycard-name{
+  font-size:12.5px;
+
+  color:var(--muted);
+
+  margin-top:6px;
+}
+
+.keycard-bar{
+  height:5px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  width:60%;
+
+  margin-top:23px;
+
+  box-shadow:
+    0 0 15px rgba(59,130,246,.45);
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+section.block{
+  padding:105px 0;
+}
+
+.divider{
+  border-top:1px solid var(--border);
+}
+
+.section-head{
+  max-width:680px;
+
+  margin-bottom:60px;
+}
+
+.section-tag{
+  display:inline-block;
+
+  font-size:12px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+  letter-spacing:.1em;
+
+  color:var(--blue-light);
+
+  margin-bottom:15px;
+}
+
+.section-head h2{
+  font-size:clamp(2rem,4vw,3rem);
+
+  line-height:1.1;
+
+  color:white;
+
+  margin:0 0 18px;
+}
+
+.section-head p{
+  color:var(--muted);
+
+  font-size:15px;
+
+  line-height:1.7;
+
+  margin:0;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.feat-list{
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:12px;
+}
+
+.feat-row{
+  display:grid;
+
+  grid-template-columns:55px 1fr;
+
+  gap:22px;
+
+  padding:27px 22px;
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025),
+      rgba(255,255,255,.008)
+    );
+
+  transition:
+    transform .25s,
+    border-color .25s,
+    background .25s;
+}
+
+.feat-row:hover{
+  transform:translateX(6px);
+
+  border-color:var(--border-blue);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(59,130,246,.07),
+      rgba(255,255,255,.015)
+    );
+}
+
+@media(min-width:760px){
+
+  .feat-row{
+    grid-template-columns:70px 250px 1fr;
+
+    align-items:center;
+  }
+
+}
+
+.feat-index{
+  font-family:'Fraunces',serif;
+
+  font-size:20px;
+
+  color:var(--blue-light);
+}
+
+.feat-name{
+  font-family:'Fraunces',serif;
+
+  font-size:21px;
+
+  color:white;
+}
+
+.feat-desc{
+  color:var(--muted);
+
+  font-size:14px;
+
+  line-height:1.65;
+
+  max-width:60ch;
+}
+
+
+/* =========================
+   ROLES
+========================= */
+
+.role-wrap{
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:22px;
+}
+
+@media(min-width:860px){
+
+  .role-wrap{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+.role-card{
+  position:relative;
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:34px 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14,29,51,.92),
+      rgba(7,17,31,.96)
+    );
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.2);
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  transition:
+    transform .3s,
+    border-color .3s,
+    box-shadow .3s;
+}
+
+.role-card:hover{
+  transform:translateY(-7px);
+
+  border-color:rgba(59,130,246,.35);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.35);
+}
+
+.role-card.featured{
+  border-color:rgba(59,130,246,.5);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30,64,175,.22),
+      rgba(7,17,31,.98)
+    );
+
+  box-shadow:
+    0 25px 70px rgba(37,99,235,.12);
+}
+
+.role-tag{
+  font-size:11px;
+
+  color:var(--blue-light);
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  margin-bottom:11px;
+}
+
+.role-title{
+  font-family:'Fraunces',serif;
+
+  font-size:25px;
+
+  color:white;
+
+  margin-bottom:25px;
+}
+
+.role-ul{
+  list-style:none;
+
+  padding:0;
+
+  margin:0 0 32px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+}
+
+.role-ul li{
+  display:flex;
+
+  gap:10px;
+
+  font-size:13.5px;
+
+  color:var(--muted);
+
+  line-height:1.5;
+}
+
+.role-ul li svg{
+  flex-shrink:0;
+
+  margin-top:2px;
+
+  width:16px;
+
+  height:16px;
+
+  color:var(--green);
+}
+
+.pill{
+  position:absolute;
+
+  top:-13px;
+
+  right:25px;
+
+  padding:6px 13px;
+
+  border-radius:50px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--cyan)
+    );
+
+  color:white;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  box-shadow:
+    0 8px 20px rgba(59,130,246,.3);
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta-band{
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:26px;
+
+  padding:65px 40px;
+
+  border:1px solid var(--border-blue);
+
+  background:
+    radial-gradient(
+      circle at 85% 50%,
+      rgba(59,130,246,.2),
+      transparent 35%
+    ),
+    linear-gradient(
+      120deg,
+      #0b2442,
+      #07111f 65%
+    );
+
+  display:grid;
+
+  grid-template-columns:1fr;
+
+  gap:30px;
+
+  align-items:center;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+}
+
+@media(min-width:860px){
+
+  .cta-band{
+    grid-template-columns:1.3fr .7fr;
+
+    padding:75px 60px;
+  }
+
+}
+
+.cta-band h2{
+  font-size:clamp(2rem,4vw,3rem);
+
+  line-height:1.1;
+
+  color:white;
+
+  margin:0 0 15px;
+}
+
+.cta-band p{
+  color:var(--muted);
+
+  font-size:15px;
+
+  line-height:1.7;
+
+  max-width:48ch;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  border-top:1px solid var(--border);
+
+  padding:45px 0;
+}
+
+.footer-inner{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+
+  align-items:flex-start;
+
+  justify-content:space-between;
+}
+
+@media(min-width:700px){
+
+  .footer-inner{
+    flex-direction:row;
+
+    align-items:center;
+  }
+
+}
+
+.footer-links{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:25px;
+
+  font-size:13px;
+
+  color:var(--muted);
+}
+
+.footer-links a{
+  transition:.2s;
+}
+
+.footer-links a:hover{
+  color:var(--blue-light);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .container{
+    padding:0 18px;
+  }
+
+  .hero{
+    padding:75px 0 70px;
+  }
+
+  .hero h1{
+    font-size:3rem;
+  }
+
+  .hero p.lead{
+    font-size:15px;
+  }
+
+  .hero-stats{
+    gap:25px;
+  }
+
+  .keycard-wrap{
+    height:390px;
+
+    transform:scale(.88);
+
+    transform-origin:center;
+  }
+
+  section.block{
+    padding:75px 0;
+  }
+
+  .feat-row{
+    padding:22px 18px;
+  }
+
+  .cta-band{
+    padding:45px 25px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-    <!-- NAVIGATION -->
 
-    <nav>
-        <div class="nav-container">
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-            <div class="logo">
-                Thallam <span>Siddhu</span>
-            </div>
+<nav>
 
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
+  <div class="container nav-inner">
 
-        </div>
-    </nav>
+    <a href="#" class="brand">
 
+      <div class="brand-mark">
+        TS
+      </div>
 
-    <!-- HERO -->
+      <div>
 
-    <header class="hero">
-
-        <div class="hero-content">
-
-            <h1>
-                Hi, I'm <span>Thallam Siddhu</span>
-            </h1>
-
-            <p>
-                Computer Science Engineering student passionate about
-                software development, programming and building useful
-                real-world applications.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="#projects" class="btn btn-primary">
-                    View Projects
-                </a>
-
-                <a href="#contact" class="btn btn-secondary">
-                    Contact Me
-                </a>
-
-            </div>
-
+        <div class="brand-name">
+          Thallam Siddhu
         </div>
 
-    </header>
+        <div class="brand-sub">
+          Hostel Management System
+        </div>
+
+      </div>
+
+    </a>
 
 
-    <!-- ABOUT -->
+    <div class="nav-links">
 
-    <section id="about">
+      <a href="#features">
+        Features
+      </a>
 
-        <h2 class="section-title">
-            About Me
+      <a href="#roles">
+        Portal roles
+      </a>
+
+      <a href="#access">
+        Live demo
+      </a>
+
+    </div>
+
+
+    <a
+      href="https://hostel-management-system-n82f.onrender.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-amber btn-sm">
+
+      Open the app
+
+    </a>
+
+  </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="container hero-grid">
+
+
+    <div>
+
+      <div class="eyebrow">
+
+        <span class="dot"></span>
+
+        Built for wardens, students and gate staff
+
+      </div>
+
+
+      <h1>
+        One key, every door of hostel life
+      </h1>
+
+
+      <p class="lead">
+
+        A single portal for room allocation, gate passes, maintenance requests and notices — so wardens spend less time on paperwork and students always know where they stand.
+
+      </p>
+
+
+      <div class="hero-actions">
+
+        <a
+          href="https://hostel-management-system-n82f.onrender.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-amber">
+
+          Launch the live system
+
+        </a>
+
+
+        <a
+          href="#features"
+          class="btn btn-ghost">
+
+          See what it does
+
+        </a>
+
+      </div>
+
+
+      <div class="hero-stats">
+
+        <div class="stat">
+
+          <b>3</b>
+
+          <span>
+            role-based dashboards
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <b>5</b>
+
+          <span>
+            core workflows covered
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <b>24/7</b>
+
+          <span>
+            gate pass verification
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- KEY CARD -->
+
+    <div class="keycard-wrap">
+
+
+      <div class="keycard k2">
+
+        <div class="keycard-top">
+
+          <div>
+
+            <div class="keycard-tag">
+              GATE PASS
+            </div>
+
+            <div
+              class="keycard-room"
+              style="font-size:22px;">
+
+              Approved
+
+            </div>
+
+          </div>
+
+
+          <div class="keycard-hole"></div>
+
+        </div>
+
+
+        <div class="keycard-name">
+
+          Verified at gate · 07:42 PM
+
+        </div>
+
+
+        <div
+          class="keycard-bar"
+          style="background:var(--green);width:80%;">
+
+        </div>
+
+      </div>
+
+
+
+      <div class="keycard k1">
+
+        <div class="keycard-top">
+
+          <div>
+
+            <div class="keycard-tag">
+              ROOM ASSIGNED
+            </div>
+
+            <div class="keycard-room">
+              B-204
+            </div>
+
+          </div>
+
+
+          <div class="keycard-hole"></div>
+
+        </div>
+
+
+        <div class="keycard-name">
+
+          2 residents · West Block
+
+        </div>
+
+
+        <div class="keycard-bar"></div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section
+  id="features"
+  class="block divider">
+
+  <div class="container">
+
+
+    <div class="section-head">
+
+      <div class="section-tag">
+        What's inside
+      </div>
+
+
+      <h2>
+        Everything a hostel office actually does, in one place
+      </h2>
+
+
+      <p>
+
+        No modules to configure and no features you'll never touch — just the day-to-day work of running a hostel, made faster.
+
+      </p>
+
+    </div>
+
+
+
+    <div class="feat-list">
+
+
+      <div class="feat-row">
+
+        <div class="feat-index">
+          01
+        </div>
+
+        <div class="feat-name">
+          Student records
+        </div>
+
+        <div class="feat-desc">
+
+          One profile per resident with contact details, emergency contacts and academic info — searchable in seconds instead of buried in registers.
+
+        </div>
+
+      </div>
+
+
+
+      <div class="feat-row">
+
+        <div class="feat-index">
+          02
+        </div>
+
+        <div class="feat-name">
+          Room allocation
+        </div>
+
+        <div class="feat-desc">
+
+          See vacant beds by floor and block at a glance, and assign incoming students without cross-checking three spreadsheets.
+
+        </div>
+
+      </div>
+
+
+
+      <div class="feat-row">
+
+        <div class="feat-index">
+          03
+        </div>
+
+        <div class="feat-name">
+          Gate pass & security
+        </div>
+
+        <div class="feat-desc">
+
+          Students request outings, wardens approve them, and security confirms entry and exit against the same record — no paper slips, no guesswork.
+
+        </div>
+
+      </div>
+
+
+
+      <div class="feat-row">
+
+        <div class="feat-index">
+          04
+        </div>
+
+        <div class="feat-name">
+          Maintenance requests
+        </div>
+
+        <div class="feat-desc">
+
+          Residents log electrical, plumbing or repair issues directly from their room, and staff can track what's open, in progress or resolved.
+
+        </div>
+
+      </div>
+
+
+
+      <div class="feat-row">
+
+        <div class="feat-index">
+          05
+        </div>
+
+        <div class="feat-name">
+          Notice board
+        </div>
+
+        <div class="feat-desc">
+
+          Mess timings, rule changes and urgent alerts reach every resident's dashboard the moment they're posted.
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ROLES
+========================= -->
+
+<section
+  id="roles"
+  class="block divider">
+
+  <div class="container">
+
+
+    <div class="section-head">
+
+      <div class="section-tag">
+        Role-based access
+      </div>
+
+
+      <h2>
+        Each person sees only what their job needs
+      </h2>
+
+
+      <p>
+
+        Wardens, residents and gate staff get purpose-built dashboards instead of one crowded admin screen.
+
+      </p>
+
+    </div>
+
+
+
+    <div class="role-wrap">
+
+
+      <!-- ADMIN -->
+
+      <div class="role-card">
+
+        <div>
+
+          <div class="role-tag">
+            System admin / warden
+          </div>
+
+
+          <div class="role-title">
+            Admin dashboard
+          </div>
+
+
+          <ul class="role-ul">
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Approve gate pass requests
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Manage room allocations
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Track maintenance tickets
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Post official notices & alerts
+
+            </li>
+
+
+          </ul>
+
+        </div>
+
+
+        <a
+          href="https://hostel-management-system-n82f.onrender.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost">
+
+          Log in as admin
+
+        </a>
+
+      </div>
+
+
+
+      <!-- STUDENT -->
+
+      <div class="role-card featured">
+
+        <div class="pill">
+          Most active
+        </div>
+
+
+        <div>
+
+          <div class="role-tag">
+            Hostel residents
+          </div>
+
+
+          <div class="role-title">
+            Student portal
+          </div>
+
+
+          <ul class="role-ul">
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Apply for outing / leave passes
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              View room details & roommate info
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Report room issues & complaints
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Check notices & announcements
+
+            </li>
+
+
+          </ul>
+
+        </div>
+
+
+        <a
+          href="https://hostel-management-system-n82f.onrender.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-amber">
+
+          Log in as student
+
+        </a>
+
+      </div>
+
+
+
+      <!-- SECURITY -->
+
+      <div class="role-card">
+
+        <div>
+
+          <div class="role-tag">
+            Gate security
+          </div>
+
+
+          <div class="role-title">
+            Security desk
+          </div>
+
+
+          <ul class="role-ul">
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Verify approved gate passes
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Log student entry and exit times
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Quick search by roll number
+
+            </li>
+
+
+            <li>
+
+              <svg fill="none"
+                   stroke="currentColor"
+                   viewBox="0 0 24 24">
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+
+              </svg>
+
+              Real-time status validation
+
+            </li>
+
+
+          </ul>
+
+        </div>
+
+
+        <a
+          href="https://hostel-management-system-n82f.onrender.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost">
+
+          Log in as security
+
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section
+  id="access"
+  class="block divider">
+
+  <div class="container">
+
+
+    <div class="cta-band">
+
+
+      <div>
+
+        <h2>
+          Ready to walk through the live system?
         </h2>
 
-        <p class="section-subtitle">
-            A little about who I am
+
+        <p>
+
+          The app is deployed and running on Render — open it in a new tab and try any of the three portals above.
+
         </p>
 
-        <div class="about-card">
+      </div>
 
-            <p>
-                I'm Thallam Siddhu, a Computer Science Engineering student
-                interested in software engineering and technology.
-                I enjoy learning programming, developing applications and
-                turning ideas into practical projects.
-            </p>
 
-        </div>
+      <div>
 
-    </section>
+        <a
+          href="https://hostel-management-system-n82f.onrender.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-amber">
 
+          Open the web app
 
-    <!-- SKILLS -->
+        </a>
 
-    <section id="skills">
+      </div>
 
-        <h2 class="section-title">
-            Skills
-        </h2>
 
-        <p class="section-subtitle">
-            Technologies and concepts I'm learning
-        </p>
+    </div>
 
-        <div class="skills">
+  </div>
 
-            <div class="skill">Python</div>
+</section>
 
-            <div class="skill">Flask</div>
 
-            <div class="skill">HTML</div>
 
-            <div class="skill">CSS</div>
+<!-- =========================
+     FOOTER
+========================= -->
 
-            <div class="skill">JavaScript</div>
+<footer>
 
-            <div class="skill">SQL</div>
+  <div class="container footer-inner">
 
-            <div class="skill">Git & GitHub</div>
 
-            <div class="skill">DSA</div>
+    <div>
 
-        </div>
+      <div
+        class="serif"
+        style="font-size:16px;color:var(--white);">
 
-    </section>
+        Thallam Siddhu — Hostel Management System
 
+      </div>
 
-    <!-- PROJECTS -->
 
-    <section id="projects">
+      <div
+        style="font-size:12px;color:var(--muted);margin-top:5px;">
 
-        <h2 class="section-title">
-            Projects
-        </h2>
+        &copy; 2026 Thallam Siddhu. All rights reserved.
 
-        <p class="section-subtitle">
-            Applications I've built
-        </p>
+      </div>
 
-        <div class="projects">
+    </div>
 
-            <!-- HOSTEL MANAGEMENT -->
 
-            <div class="project-card">
+    <div class="footer-links">
 
-                <h3>
-                    Hostel Management System
-                </h3>
+      <a
+        href="https://hostel-management-system-n82f.onrender.com/"
+        target="_blank"
+        rel="noopener noreferrer">
 
-                <p>
-                    A web-based hostel management application designed
-                    to manage students, rooms, authentication and
-                    hostel-related activities.
-                </p>
+        Render app
 
-                <a
-                    href="https://hostel-management-system-n82f.onrender.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link"
-                >
-                    Open Project →
-                </a>
+      </a>
 
-            </div>
 
+      <a href="#features">
+        Features
+      </a>
 
-            <!-- PASSWORD VAULT -->
 
-            <div class="project-card">
+      <a href="#roles">
+        Roles
+      </a>
 
-                <h3>
-                    PasswordVault
-                </h3>
+    </div>
 
-                <p>
-                    A password management application built to securely
-                    store and manage website credentials.
-                </p>
 
-                <a
-                    href="#"
-                    class="project-link"
-                    onclick="showMessage(event)"
-                >
-                    View Project →
-                </a>
+  </div>
 
-            </div>
+</footer>
 
-
-            <!-- SMART WEATHER -->
-
-            <div class="project-card">
-
-                <h3>
-                    Smart Weather
-                </h3>
-
-                <p>
-                    A weather application designed to provide location-based
-                    weather information with an interactive interface.
-                </p>
-
-                <a
-                    href="#"
-                    class="project-link"
-                    onclick="showMessage(event)"
-                >
-                    View Project →
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
-
-    <section id="contact">
-
-        <div class="contact-card">
-
-            <h2 class="section-title">
-                Let's Connect
-            </h2>
-
-            <p>
-                Interested in technology, software development and
-                building useful applications.
-            </p>
-
-            <a
-                href="mailto:your-email@example.com"
-                class="btn btn-primary"
-            >
-                Contact Me
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        © 2026 Thallam Siddhu. All rights reserved.
-
-    </footer>
-
-
-    <script>
-
-        function showMessage(event) {
-
-            event.preventDefault();
-
-            alert("Project link will be added soon.");
-
-        }
-
-    </script>
 
 </body>
 </html>
